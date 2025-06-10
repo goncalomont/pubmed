@@ -83,8 +83,8 @@ MeSH_QUERY = ('("Interleukin-11"[MeSH Terms] OR "IL-11"[Title/Abstract] OR "IL11
 SPECIES_FILTER = '"animals"[MeSH Terms]'
 
 ARTICLE_TYPE_FILTERS = ("clinical trial[pt] OR randomized controlled trial[pt] OR meta-analysis[pt] OR "
-                       "systematic review[pt] OR observational study[pt] OR review[pt] OR "
-                       "case reports[pt] OR practice guideline[pt]")  
+                       "systematic review[pt] OR systematic[sb] OR observational study[pt] OR review[pt] OR "
+                       "case reports[pt] OR practice guideline[pt] OR \"pubmed books\"[sb]")
 query = f"({MeSH_QUERY}) AND ({SPECIES_FILTER}) AND ({ARTICLE_TYPE_FILTERS})"
 
 # Step 1: Search PubMed
