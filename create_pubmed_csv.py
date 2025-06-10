@@ -264,6 +264,11 @@ for article in articles['PubmedArticle']:
         article_data["License"] = license or ""
         article_data["FreePDF_Link"] = best_oa_url or ""
 
+        # Filter articles based on license
+        if license and license.lower() in ["cc-by-nc", "cc-by-nd"]:
+            logger.info(f"Skipping article {article_data.get('PMID', 'Unknown')} due to license: {license}")
+            continue
+
         data.append(article_data)
 
     except Exception as e:
