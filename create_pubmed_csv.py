@@ -73,15 +73,19 @@ def get_unpaywall_info(doi, email):
         time.sleep(0.1)  # Respect Unpaywall rate limits (10 requests/second)
 
 # Set Query filters based on MeSH and Article Type
-MeSH_QUERY = ("Neoplasms[MeSH Terms] OR Cardiovascular Diseases[MeSH Terms] OR "
-              "Diabetes Mellitus[MeSH Terms] OR Respiratory Tract Diseases[MeSH Terms] OR "
-              "Nervous System Diseases[MeSH Terms] OR Reproductive Health[MeSH Terms] OR "
-              "Gynecology[MeSH Terms] OR Obstetrics[MeSH Terms] OR Maternal Health[MeSH Terms]")
+MeSH_QUERY = ('("Interleukin-11"[MeSH Terms] OR "IL-11"[Title/Abstract] OR "IL11"[Title/Abstract] OR "interleukin 11 receptor"[Title/Abstract] OR "IL11RA"[MeSH Terms] OR "IL11RA"[Title/Abstract]) OR '
+              '("fibrosis"[MeSH Major Topic] OR "pulmonary fibrosis"[MeSH Terms] OR "non-alcoholic steatohepatitis"[MeSH Terms] OR "NASH"[Title/Abstract] OR "crohn disease"[MeSH Terms] OR "inflammatory bowel diseases"[MeSH Terms] OR "eosinophilic esophagitis"[MeSH Terms]) OR '
+              '("immunology"[MeSH Major Topic] OR "cytokines"[MeSH Terms] OR "inflammation"[MeSH Major Topic]) OR '
+              '("transcriptomic*"[Title/Abstract] OR "proteomic*"[Title/Abstract] OR "single cell"[Title/Abstract]) OR '
+              '("fibroblast*"[Title/Abstract] OR "myofibroblast*"[Title/Abstract] OR "macrophage*"[Title/Abstract])'
+             )
+
+SPECIES_FILTER = '"animals"[MeSH Terms]'
 
 ARTICLE_TYPE_FILTERS = ("clinical trial[pt] OR randomized controlled trial[pt] OR meta-analysis[pt] OR "
                        "systematic review[pt] OR observational study[pt] OR review[pt] OR "
                        "case reports[pt] OR practice guideline[pt]")  
-query = f"({MeSH_QUERY}) AND ({ARTICLE_TYPE_FILTERS})"
+query = f"({MeSH_QUERY}) AND ({SPECIES_FILTER}) AND ({ARTICLE_TYPE_FILTERS})"
 
 # Step 1: Search PubMed
 try:
