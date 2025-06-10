@@ -82,9 +82,11 @@ MeSH_QUERY = ('("Interleukin-11"[MeSH Terms] OR "IL-11"[Title/Abstract] OR "IL11
 
 SPECIES_FILTER = '"animals"[MeSH Terms]'
 
-ARTICLE_TYPE_FILTERS = ("clinical trial[pt] OR randomized controlled trial[pt] OR meta-analysis[pt] OR "
-                       "systematic review[pt] OR systematic[sb] OR observational study[pt] OR review[pt] OR "
-                       "case reports[pt] OR practice guideline[pt] OR \"pubmed books\"[sb]")
+ARTICLE_TYPE_FILTERS = (
+    "clinical trial[pt] OR randomized controlled trial[pt] OR meta-analysis[pt] OR "
+    "systematic review[pt] OR systematic[sb] OR observational study[pt] OR review[pt] OR "
+    "case reports[pt] OR practice guideline[pt] OR \"pubmed books\"[sb]"
+)
 query = f"({MeSH_QUERY}) AND ({SPECIES_FILTER}) AND ({ARTICLE_TYPE_FILTERS})"
 
 # Step 1: Search PubMed
@@ -100,6 +102,40 @@ try:
 except Exception as e:
     logger.error(f"Error searching PubMed: {str(e)}")
     pmids = []
+
+ARTICLE_FILTER_MAP = {
+    "Books & Documents": ["Book", "Book Chapter"],
+    "Clinical Trial": [
+        "Clinical Trial", "Clinical Trial, Phase I", "Clinical Trial, Phase II",
+        "Clinical Trial, Phase III", "Clinical Trial, Phase IV",
+        "Controlled Clinical Trial", "Pragmatic Clinical Trial"
+    ],
+    "Randomized Controlled Trial": ["Randomized Controlled Trial"],
+    "Meta-Analysis": ["Meta-Analysis", "Network Meta-Analysis"],
+    "Observational Study": ["Observational Study", "Observational Study, Veterinary"],
+    "Review": ["Review"],
+    "Case Reports": ["Case Reports"],
+    "Practice Guideline": ["Practice Guideline"],
+}
+
+def detect_filters(pub_types, title, abstract, is_book_xml=False):
+    """Return a semicolon-delimited list that mirrors PubMed’s article-type sidebar."""
+    hits = set()
+    # publication-type matches
+    for filt, pts in ARTICLE_FILTER_MAP.items():
+        if any(pt.lower() in (p.lower() for p in pub_types) for pt in pts):
+            hits.add(filt)
+
+    # hybrid hedge for Systematic Review
+    if ("systematic review" in (p.lower() for p in pub_types) or
+        re.search(r"\bsystematic (literature )?(review|meta[- ]review|mapping review)\b",
+                  f"{title} {abstract}", flags=re.I)):
+        hits.add("Systematic Review")
+
+    if is_book_xml:
+        hits.add("Books & Documents")
+
+    return "; ".join(sorted(hits)) or "Uncategorized"
 
 # Step 2: Fetch full records in XML format
 

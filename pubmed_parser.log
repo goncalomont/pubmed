@@ -142,3 +142,119 @@
 2025-06-10 22:39:00,200 - WARNING - No license was found for DOI 10.1189/jlb.0410226 (OA: True)
 2025-06-10 22:39:05,220 - WARNING - No license was found for DOI 10.1046/j.1365-2036.2002.01242.x (OA: True)
 2025-06-10 22:39:05,821 - INFO - Processed 200 articles successfully.
+2025-06-10 23:45:54,475 - INFO - Running PubMed search…
+2025-06-10 23:45:56,571 - INFO - Found 200 PMIDs
+2025-06-10 23:46:00,524 - WARNING - No licence found for DOI 10.1001/jama.2020.18936
+2025-06-10 23:46:03,527 - WARNING - No licence found for DOI 10.1016/j.cgh.2022.06.030
+2025-06-10 23:46:04,127 - WARNING - DOI not provided.
+2025-06-10 23:46:04,127 - ERROR - Parsing error on PMID 21524318: 'NoneType' object has no attribute 'lower'
+2025-06-10 23:46:04,997 - WARNING - No licence found for DOI 10.1016/j.cgh.2022.11.026
+2025-06-10 23:46:07,973 - WARNING - No licence found for DOI 10.1007/s10620-023-08014-z
+2025-06-10 23:46:11,504 - WARNING - No licence found for DOI 10.1093/ibd/izad149
+2025-06-10 23:46:12,122 - INFO - Skip PMID 37505446 due to licence cc-by-nc
+2025-06-10 23:46:14,993 - WARNING - No licence found for DOI 10.1093/cei/uxad108
+2025-06-10 23:46:20,519 - WARNING - No licence found for DOI 10.3238/arztebl.2017.0331
+2025-06-10 23:46:22,460 - WARNING - No licence found for DOI 10.1097/01.MIB.0000442014.52661.20
+2025-06-10 23:46:23,965 - WARNING - No licence found for DOI 10.1111/j.1601-0825.2011.01811.x
+2025-06-10 23:46:24,968 - WARNING - No licence found for DOI 10.1177/2047487318792952
+2025-06-10 23:46:27,067 - INFO - Skip PMID 24696600 due to licence cc-by-nc
+2025-06-10 23:46:36,496 - WARNING - No licence found for DOI 10.1136/bcr-2013-008724
+2025-06-10 23:46:36,981 - WARNING - No licence found for DOI 10.1002/bjs.9302
+2025-06-10 23:46:37,483 - WARNING - No licence found for DOI 10.1136/gutjnl-2012-303461
+2025-06-10 23:46:40,499 - INFO - Skip PMID 35945034 due to licence cc-by-nc
+2025-06-10 23:46:40,881 - WARNING - No licence found for DOI 10.1111/apt.12478
+2025-06-10 23:46:43,953 - WARNING - No licence found for DOI 10.1007/s10620-023-07837-0
+2025-06-10 23:46:45,132 - INFO - Skip PMID 37300511 due to licence cc-by-nc
+2025-06-10 23:46:46,921 - WARNING - No licence found for DOI 10.2741/s324
+2025-06-10 23:46:47,421 - WARNING - No licence found for DOI 10.1111/apt.14852
+2025-06-10 23:46:49,417 - WARNING - No licence found for DOI 10.1053/j.gastro.2011.02.016
+2025-06-10 23:46:52,377 - WARNING - No licence found for DOI 10.3238/arztebl.2009.0123
+2025-06-10 23:46:57,423 - WARNING - No licence found for DOI 10.1093/oxfordjournals.jncimonographs.a003435
+2025-06-10 23:46:58,395 - WARNING - No licence found for DOI 10.1080/15548627.2017.1389358
+2025-06-10 23:46:59,533 - WARNING - DOI not provided.
+2025-06-10 23:46:59,533 - ERROR - Parsing error on PMID 1292471: 'NoneType' object has no attribute 'lower'
+2025-06-10 23:47:00,409 - WARNING - No licence found for DOI 10.3748/wjg.v19.i25.3931
+2025-06-10 23:47:01,024 - INFO - Skip PMID 38453206 due to licence cc-by-nc
+2025-06-10 23:47:05,972 - INFO - Skip PMID 17007011 due to licence cc-by-nc
+2025-06-10 23:47:09,058 - WARNING - DOI not provided.
+2025-06-10 23:47:09,058 - ERROR - Parsing error on PMID 11890354: 'NoneType' object has no attribute 'lower'
+2025-06-10 23:47:09,539 - INFO - Skip PMID 35830035 due to licence cc-by-nc
+2025-06-10 23:47:12,018 - INFO - Skip PMID 38341192 due to licence cc-by-nc
+2025-06-10 23:47:12,413 - WARNING - No licence found for DOI 10.1097/MCG.0b013e318247c32f
+2025-06-10 23:47:14,527 - INFO - Skip PMID 26229413 due to licence cc-by-nc
+2025-06-10 23:47:15,042 - INFO - Skip PMID 27417569 due to licence cc-by-nc
+2025-06-10 23:47:15,541 - WARNING - DOI not provided.
+2025-06-10 23:47:15,541 - ERROR - Parsing error on PMID 35379111: 'NoneType' object has no attribute 'lower'
+2025-06-10 23:47:21,466 - WARNING - No licence found for DOI 10.1002/stem.5530110825
+2025-06-10 23:47:25,096 - WARNING - DOI not provided.
+2025-06-10 23:47:25,096 - ERROR - Parsing error on PMID 23114581: 'NoneType' object has no attribute 'lower'
+2025-06-10 23:47:25,096 - WARNING - DOI not provided.
+2025-06-10 23:47:25,096 - ERROR - Parsing error on PMID 23873428: 'NoneType' object has no attribute 'lower'
+2025-06-10 23:47:26,487 - WARNING - No licence found for DOI 10.1007/s10620-021-07200-1
+2025-06-10 23:47:28,504 - WARNING - No licence found for DOI 10.9738/INTSURG-D-13-00160.1
+2025-06-10 23:47:29,014 - WARNING - No licence found for DOI 10.1111/apt.13511
+2025-06-10 23:47:29,975 - WARNING - No licence found for DOI 10.14309/ajg.0000000000002215
+2025-06-10 23:47:31,072 - INFO - Skip PMID 23139600 due to licence cc-by-nc
+2025-06-10 23:47:34,078 - INFO - Skip PMID 37219801 due to licence cc-by-nc
+2025-06-10 23:47:34,979 - WARNING - No licence found for DOI 10.1136/pmj.76.895.273
+2025-06-10 23:47:36,580 - INFO - Skip PMID 36515348 due to licence cc-by-nc
+2025-06-10 23:47:37,030 - WARNING - No licence found for DOI 10.1007/s00535-009-0191-y
+2025-06-10 23:47:37,654 - INFO - Processed 181 records; writing CSV
+2025-06-11 00:01:47,276 - INFO - Running PubMed search…
+2025-06-11 00:01:48,801 - INFO - Found 200 PMIDs
+2025-06-11 00:01:52,264 - WARNING - No licence found for DOI 10.1001/jama.2020.18936
+2025-06-11 00:01:54,753 - WARNING - No licence found for DOI 10.1016/j.cgh.2022.06.030
+2025-06-11 00:01:55,349 - WARNING - DOI not provided.
+2025-06-11 00:01:55,349 - ERROR - Parsing error on PMID 21524318: 'NoneType' object has no attribute 'lower'
+2025-06-11 00:01:56,323 - WARNING - No licence found for DOI 10.1016/j.cgh.2022.11.026
+2025-06-11 00:01:59,332 - WARNING - No licence found for DOI 10.1007/s10620-023-08014-z
+2025-06-11 00:02:02,956 - WARNING - No licence found for DOI 10.1093/ibd/izad149
+2025-06-11 00:02:03,566 - INFO - Skip PMID 37505446 due to licence cc-by-nc
+2025-06-11 00:02:06,407 - WARNING - No licence found for DOI 10.1093/cei/uxad108
+2025-06-11 00:02:11,982 - WARNING - No licence found for DOI 10.3238/arztebl.2017.0331
+2025-06-11 00:02:13,980 - WARNING - No licence found for DOI 10.1097/01.MIB.0000442014.52661.20
+2025-06-11 00:02:15,516 - WARNING - No licence found for DOI 10.1111/j.1601-0825.2011.01811.x
+2025-06-11 00:02:16,521 - WARNING - No licence found for DOI 10.1177/2047487318792952
+2025-06-11 00:02:18,641 - INFO - Skip PMID 24696600 due to licence cc-by-nc
+2025-06-11 00:02:28,073 - WARNING - No licence found for DOI 10.1136/bcr-2013-008724
+2025-06-11 00:02:28,581 - WARNING - No licence found for DOI 10.1002/bjs.9302
+2025-06-11 00:02:29,091 - WARNING - No licence found for DOI 10.1136/gutjnl-2012-303461
+2025-06-11 00:02:31,718 - INFO - Skip PMID 35945034 due to licence cc-by-nc
+2025-06-11 00:02:32,116 - WARNING - No licence found for DOI 10.1111/apt.12478
+2025-06-11 00:02:35,128 - WARNING - No licence found for DOI 10.1007/s10620-023-07837-0
+2025-06-11 00:02:36,245 - INFO - Skip PMID 37300511 due to licence cc-by-nc
+2025-06-11 00:02:37,623 - WARNING - No licence found for DOI 10.2741/s324
+2025-06-11 00:02:38,137 - WARNING - No licence found for DOI 10.1111/apt.14852
+2025-06-11 00:02:40,142 - WARNING - No licence found for DOI 10.1053/j.gastro.2011.02.016
+2025-06-11 00:02:43,171 - WARNING - No licence found for DOI 10.3238/arztebl.2009.0123
+2025-06-11 00:02:48,155 - WARNING - No licence found for DOI 10.1093/oxfordjournals.jncimonographs.a003435
+2025-06-11 00:02:49,192 - WARNING - No licence found for DOI 10.1080/15548627.2017.1389358
+2025-06-11 00:02:50,268 - WARNING - DOI not provided.
+2025-06-11 00:02:50,268 - ERROR - Parsing error on PMID 1292471: 'NoneType' object has no attribute 'lower'
+2025-06-11 00:02:51,171 - WARNING - No licence found for DOI 10.3748/wjg.v19.i25.3931
+2025-06-11 00:02:51,789 - INFO - Skip PMID 38453206 due to licence cc-by-nc
+2025-06-11 00:02:56,913 - INFO - Skip PMID 17007011 due to licence cc-by-nc
+2025-06-11 00:03:03,213 - WARNING - DOI not provided.
+2025-06-11 00:03:03,213 - ERROR - Parsing error on PMID 11890354: 'NoneType' object has no attribute 'lower'
+2025-06-11 00:03:03,717 - INFO - Skip PMID 35830035 due to licence cc-by-nc
+2025-06-11 00:03:06,211 - INFO - Skip PMID 38341192 due to licence cc-by-nc
+2025-06-11 00:03:06,607 - WARNING - No licence found for DOI 10.1097/MCG.0b013e318247c32f
+2025-06-11 00:03:08,745 - INFO - Skip PMID 26229413 due to licence cc-by-nc
+2025-06-11 00:03:09,247 - INFO - Skip PMID 27417569 due to licence cc-by-nc
+2025-06-11 00:03:09,750 - WARNING - DOI not provided.
+2025-06-11 00:03:09,750 - ERROR - Parsing error on PMID 35379111: 'NoneType' object has no attribute 'lower'
+2025-06-11 00:03:15,583 - WARNING - No licence found for DOI 10.1002/stem.5530110825
+2025-06-11 00:03:19,158 - WARNING - DOI not provided.
+2025-06-11 00:03:19,158 - ERROR - Parsing error on PMID 23114581: 'NoneType' object has no attribute 'lower'
+2025-06-11 00:03:19,158 - WARNING - DOI not provided.
+2025-06-11 00:03:19,158 - ERROR - Parsing error on PMID 23873428: 'NoneType' object has no attribute 'lower'
+2025-06-11 00:03:20,555 - WARNING - No licence found for DOI 10.1007/s10620-021-07200-1
+2025-06-11 00:03:22,563 - WARNING - No licence found for DOI 10.9738/INTSURG-D-13-00160.1
+2025-06-11 00:03:23,063 - WARNING - No licence found for DOI 10.1111/apt.13511
+2025-06-11 00:03:24,068 - WARNING - No licence found for DOI 10.14309/ajg.0000000000002215
+2025-06-11 00:03:25,145 - INFO - Skip PMID 23139600 due to licence cc-by-nc
+2025-06-11 00:03:28,145 - INFO - Skip PMID 37219801 due to licence cc-by-nc
+2025-06-11 00:03:29,030 - WARNING - No licence found for DOI 10.1136/pmj.76.895.273
+2025-06-11 00:03:30,637 - INFO - Skip PMID 36515348 due to licence cc-by-nc
+2025-06-11 00:03:31,020 - WARNING - No licence found for DOI 10.1007/s00535-009-0191-y
+2025-06-11 00:03:31,626 - INFO - Processed 181 records; writing CSV
