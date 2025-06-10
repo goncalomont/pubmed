@@ -45,10 +45,11 @@ def search_pubmed_and_fetch_details(search_term, max_articles=20):
                 if record:
                     title = record.get("TI", "No Title Available")
                     abstract = record.get("AB", "No Abstract Available")
-                    articles.append({"PMID": pmid, "Title": title, "Abstract": abstract})
+                    authors = record.get("AU", record.get("FAU", [])) # Extract authors
+                    articles.append({"PMID": pmid, "Title": title, "Abstract": abstract, "Authors": authors})
                 else:
                     print(f"    Warning: Could not parse Medline record for PMID {pmid}")
-                    articles.append({"PMID": pmid, "Title": "Error parsing Medline", "Abstract": "Error parsing Medline"})
+                    articles.append({"PMID": pmid, "Title": "Error parsing Medline", "Abstract": "Error parsing Medline", "Authors": []})
 
                 time.sleep(0.34) # NCBI API rate limit (3 requests per second without API key)
 
@@ -356,6 +357,7 @@ def main():
         pmid = article_info.get("PMID")
         title = article_info.get("Title", "No title found")
         abstract = article_info.get("Abstract", "No abstract found")
+        authors = article_info.get("Authors", []) # Retrieve authors
 
         if not pmid:
             print("Skipping article with no PMID.")
@@ -436,9 +438,62 @@ def main():
                                         abstract = meta_abstract_tag['content']
                                         print(f"    Fell back to HTML meta tag for abstract: {abstract[:100]}...")
 
+                            # --- Abstract Removal from Soup ---
+                            # The 'abstract' variable should be populated by now (either from Medline or HTML fallback).
+                            # Now, remove the abstract section from html_soup to prevent it from being included in full_text_content.
+                            abstract_selectors_for_removal = [
+                                'div.abstract', 'div#abstract',
+                                'section#abstract', "div[role='abstract']",
+                                'div.abstract_content', 'section.abstract', # Add a few more common ones
+                                "meta[name='citation_abstract']" # Also remove meta tag if it was used
+                            ]
+
+                            # Determine the primary search area for abstract removal
+                            # Default to html_soup, but prefer article_body if it has been identified
+                            # Note: article_body is identified *after* this block in the original code.
+                            # For removal, we should search within the whole soup or specific abstract containers.
+
+                            # First, try to identify a specific article_body for more targeted removal,
+                            # This is a bit of a lookahead to where article_body is usually found.
+                            # This helps if the abstract is outside the main article_body but we still want to clean article_body.
+                            temp_article_body_search_areas = [
+                                html_soup.find('article'),
+                                html_soup.find('div', id='article-body'),
+                                html_soup.find('div', class_='article-body'),
+                                html_soup.find('div', class_='main-content'),
+                                html_soup.find('div', class_='article-content'),
+                                html_soup.find('div', class_='rendered_body')
+                            ]
+                            identified_article_body_for_removal = next((body for body in temp_article_body_search_areas if body is not None), None)
+
+                            for selector in abstract_selectors_for_removal:
+                                elements_to_search_in = []
+                                if identified_article_body_for_removal:
+                                    elements_to_search_in.append(identified_article_body_for_removal)
+                                else: # Fallback to searching the whole soup if no specific body part identified yet
+                                    elements_to_search_in.append(html_soup)
+
+                                for search_area_root in elements_to_search_in:
+                                    if not search_area_root: continue # Skip if search area is None
+
+                                    if selector.startswith("meta["):
+                                        # Meta tags are typically in <head>, so search html_soup directly
+                                        meta_elements = html_soup.select(selector)
+                                        for el in meta_elements:
+                                            print(f"    Decomposing meta tag '{selector}' to separate abstract from full text.")
+                                            el.decompose()
+                                    else:
+                                        abstract_elements_to_remove = search_area_root.select(selector)
+                                        for abs_el in abstract_elements_to_remove:
+                                            print(f"    Decomposing element matching selector '{selector}' in {'identified body' if identified_article_body_for_removal else 'full soup'} to separate abstract from full text.")
+                                            abs_el.decompose()
+                            # --- End of Abstract Removal ---
+
                             # Enhanced Full Text Extraction
                             article_body = html_soup.find('article')
-                            if not article_body:
+                            # The article_body finding logic is repeated here from the original code,
+                            # ensuring it uses the potentially modified html_soup.
+                            if not article_body: # Check if already found by the abstract removal's temp search
                                 article_body = html_soup.find('div', id='article-body')
                             if not article_body:
                                 article_body = html_soup.find('div', class_='article-body')
@@ -451,22 +506,29 @@ def main():
                             # The original fallback to html_soup.find('body') is intentionally kept later
                             # as it's a very broad selector.
 
-                            if article_body:
+                            if article_body: # article_body might have been modified by decompose
                                 full_text_content = article_body.get_text(separator='\n\n', strip=True)
                                 full_text_content = full_text_content[:5000] # Limit length
-                                print(f"    Successfully extracted ~{len(full_text_content)} chars of text content.")
+                                if full_text_content.strip(): # Check if content is not just whitespace after potential decompose
+                                    print(f"    Successfully extracted ~{len(full_text_content)} chars of text content (after abstract removal).")
+                                else:
+                                    print(f"    Full text content is empty after abstract removal and get_text().")
+                                    # Consider if a fallback to html_soup.body.get_text() is needed if article_body becomes empty
                             else:
                                 # Fallback to body if no specific article_body found
-                                article_body = html_soup.find('body')
-                                if article_body:
-                                    full_text_content = article_body.get_text(separator='\n\n', strip=True)
-                                    print(f"    Fell back to 'body' tag for full text extraction. Extracted ~{len(full_text_content)} chars.")
+                                # This html_soup.find('body') should use the soup instance from which abstract was removed.
+                                fallback_body_search_area = html_soup.find('body')
+                                if fallback_body_search_area:
+                                    full_text_content = fallback_body_search_area.get_text(separator='\n\n', strip=True)
+                                    print(f"    Fell back to 'body' tag for full text extraction (after abstract removal). Extracted ~{len(full_text_content)} chars.")
                                 else:
-                                    print("    Could not find main article content body/div in HTML, nor the main 'body' tag.")
+                                    print("    Could not find main article content body/div in HTML, nor the main 'body' tag (after abstract removal).")
+                                full_text_content = full_text_content[:5000] # Limit length
+
 
                                 # Still try to get license even if main body not found
                                 if not article_license and html_soup: # Check again, in case html_soup was valid but body wasn't
-                                    license_from_html = extract_license_from_html(html_soup, pmid)
+                                    license_from_html = extract_license_from_html(html_soup, pmid) # html_soup is the modified one
                                     if license_from_html:
                                         article_license = license_from_html
 
@@ -571,7 +633,8 @@ def main():
             "Abstract": abstract, # Store original abstract
             "IsOpenAccess": is_open_access,
             "FullTextContent": full_text_content if full_text_content else "[No content extracted or not applicable]",
-            "License": final_license_value # Use the final_license_value
+            "License": final_license_value, # Use the final_license_value
+            "Authors": authors
         })
         print(f"  Article {pmid} (License: '{final_license_value}') added to dataset. Full text available: {full_text_is_avail}, Abstract available: {abstract_is_avail}.")
         print("-" * 20)
@@ -581,7 +644,7 @@ def main():
 
     # Write to CSV
     csv_file_path = "pubmed_articles.csv"
-    csv_header = ["PMID", "Title", "Abstract", "IsOpenAccess", "FullTextContent", "License"] # Add "License" to header
+    csv_header = ["PMID", "Title", "Abstract", "Authors", "IsOpenAccess", "FullTextContent", "License"] # Add "Authors" to header
 
     try:
         with open(csv_file_path, "w", newline="", encoding="utf-8") as csvfile:
