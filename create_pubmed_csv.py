@@ -395,18 +395,75 @@ def main():
                                 if license_from_html:
                                     article_license = license_from_html
 
-                            article_body = html_soup.find('div', class_='article-content') # Common on PMC
+                            # Fallback for Title from HTML
+                            if title == "No Title Available" or not title:
+                                title_tag = html_soup.find('h1', class_='content-title')
+                                if not title_tag:
+                                    title_tag = html_soup.find('h1', class_='article-title')
+                                if not title_tag:
+                                    title_tag = html_soup.find('meta', attrs={'name': 'citation_title'})
+                                    if title_tag and title_tag.get('content'):
+                                        title = title_tag['content']
+                                        print(f"    Fell back to HTML meta tag for title: {title[:60]}...")
+                                    elif title_tag: # case where meta tag found but no content
+                                        title_tag = None # reset to avoid using empty tag
+                                if not title_tag: # check if previous meta tag search was successful
+                                    title_tag = html_soup.find('title')
+
+                                if title_tag and hasattr(title_tag, 'get_text') and title_tag.get_text(strip=True): # Check for text content for non-meta tags
+                                    title = title_tag.get_text(strip=True)
+                                    print(f"    Fell back to HTML for title: {title[:60]}...")
+                                elif title_tag and not hasattr(title_tag, 'get_text'): # handles the case where title was updated by meta tag already
+                                    pass
+
+
+                            # Fallback for Abstract from HTML
+                            if abstract == "No Abstract Available" or not abstract:
+                                abstract_section = html_soup.find('div', class_='abstract')
+                                if not abstract_section:
+                                    abstract_section = html_soup.find('div', id='abstract')
+                                if not abstract_section:
+                                    abstract_section = html_soup.find('section', id='abstract')
+                                if not abstract_section:
+                                    abstract_section = html_soup.find('div', attrs={'role': 'abstract'})
+
+                                if abstract_section and abstract_section.get_text(strip=True):
+                                    abstract = abstract_section.get_text(separator='\n\n', strip=True)
+                                    print(f"    Fell back to HTML for abstract: {abstract[:100]}...")
+                                else: # If no div/section found, try meta tag
+                                    meta_abstract_tag = html_soup.find('meta', attrs={'name': 'citation_abstract'})
+                                    if meta_abstract_tag and meta_abstract_tag.get('content'):
+                                        abstract = meta_abstract_tag['content']
+                                        print(f"    Fell back to HTML meta tag for abstract: {abstract[:100]}...")
+
+                            # Enhanced Full Text Extraction
+                            article_body = html_soup.find('article')
+                            if not article_body:
+                                article_body = html_soup.find('div', id='article-body')
+                            if not article_body:
+                                article_body = html_soup.find('div', class_='article-body')
+                            if not article_body:
+                                article_body = html_soup.find('div', class_='main-content')
+                            if not article_body:
+                                article_body = html_soup.find('div', class_='article-content') # Common on PMC
                             if not article_body:
                                 article_body = html_soup.find('div', class_='rendered_body') # Another common one
-                            if not article_body:
-                                article_body = html_soup.find('body')
+                            # The original fallback to html_soup.find('body') is intentionally kept later
+                            # as it's a very broad selector.
 
                             if article_body:
                                 full_text_content = article_body.get_text(separator='\n\n', strip=True)
                                 full_text_content = full_text_content[:5000] # Limit length
                                 print(f"    Successfully extracted ~{len(full_text_content)} chars of text content.")
                             else:
-                                print("    Could not find main article content body/div in HTML.")
+                                # Fallback to body if no specific article_body found
+                                article_body = html_soup.find('body')
+                                if article_body:
+                                    full_text_content = article_body.get_text(separator='\n\n', strip=True)
+                                    print(f"    Fell back to 'body' tag for full text extraction. Extracted ~{len(full_text_content)} chars.")
+                                else:
+                                    print("    Could not find main article content body/div in HTML, nor the main 'body' tag.")
+
                                 # Still try to get license even if main body not found
                                 if not article_license and html_soup: # Check again, in case html_soup was valid but body wasn't
                                     license_from_html = extract_license_from_html(html_soup, pmid)

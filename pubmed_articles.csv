@@ -1,101 +1,5 @@
 PMID,Title,Abstract,IsOpenAccess,FullTextContent,License
-40467633,No Title Available,No Abstract Available,True,"Skip to main content
-
-An official website of the United States government
-
-Here's how you know
-
-Here's how you know
-
-Official websites use .gov
-
-A
-
-.gov
-
-website belongs to an official
-                            government organization in the United States.
-
-Secure .gov websites use HTTPS
-
-A
-
-lock
-
-(
-
-Lock
-
-Locked padlock icon
-
-) or
-
-https://
-
-means you've safely
-                                connected to the .gov website. Share sensitive
-                                information only on official, secure websites.
-
-Search
-
-Log in
-
-Dashboard
-
-Publications
-
-Account settings
-
-Log out
-
-Search…
-
-Search NCBI
-
-Primary site navigation
-
-Search
-
-Logged in as:
-
-Dashboard
-
-Publications
-
-Account settings
-
-Log in
-
-Search PMC Full-Text Archive
-
-Search in PMC
-
-Advanced Search
-
-Journal List
-
-User Guide
-
-New
-
-Try this search in PMC Beta Search
-
-PERMALINK
-
-Copy
-
-As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
-    the contents by NLM or the National Institutes of Health.
-
-Learn more:
-
-PMC Disclaimer
-
-|
-
-PMC Copyright Notice
-
-Sci Data
+40467633,Updating TCGA glioma classification through integration of molecular data following the latest WHO guidelines,No Abstract Available,True,"Sci Data
 
 . 2025 Jun 4;12:935. doi:
 
@@ -313,114 +217,22 @@ Received 2025 Jan 29; Accepted 2025 May 1; Collection date 2025.
 
 Open Access
 
-This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License, which permits any non-commercial use, sharing, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if you modified the licensed material. You do not have permission under this licence to share adapted material derived from this article or parts of it. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not ",cc-by-nc-nd
-40463063,No Title Available,No Abstract Available,True,"Skip to main content
+This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License, which permits any non-commercial use, sharing, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if you modified the licensed material. You do not have permission under this licence to share adapted material derived from this article or parts of it. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit
 
-An official website of the United States government
+http://creativecommons.org/licenses/by-nc-nd/4.0/
 
-Here's how you know
+.
 
-Here's how you know
+PMC Copyright notice
 
-Official websites use .gov
+PMCID: PMC12137945  PMID:
 
-A
+40467633
 
-.gov
+Abstract
 
-website belongs to an official
-                            government organization in the United States.
-
-Secure .gov websites use HTTPS
-
-A
-
-lock
-
-(
-
-Lock
-
-Locked padlock icon
-
-) or
-
-https://
-
-means you've safely
-                                connected to the .gov website. Share sensitive
-                                information only on official, secure websites.
-
-Search
-
-Log in
-
-Dashboard
-
-Publications
-
-Account settings
-
-Log out
-
-Search…
-
-Search NCBI
-
-Primary site navigation
-
-Search
-
-Logged in as:
-
-Dashboard
-
-Publications
-
-Account settings
-
-Log in
-
-Search PMC Full-Text Archive
-
-Search in PMC
-
-Advanced Search
-
-Journal List
-
-User Guide
-
-New
-
-Try this search in PMC Beta Search
-
-PERMALINK
-
-Copy
-
-As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
-    the contents by NLM or the National Institutes of Health.
-
-Learn more:
-
-PMC Disclaimer
-
-|
-
-PMC Copyright Notice
-
-This is a preprint.
-
-It has not yet been peer reviewed by a journal.
-
-The National Library of Medicine is
-
-running a pilot
-
-to include preprints that result from research funded by NIH in PMC and PubMed.
-
-bioRxiv
+The understanding of glioma disease has significantly advanced through the application of genetic and molecular profiling techniques on brain tumour tissue. Molecular biomarkers have gained a crucial role in glioma diagnosis, driving groundbreaking changes in the disease classification as standardised by the 2016 and 2021 World Health Organisation (WHO) Classification of Tumours of the Central Nervous System. Recent insights from large-scale multi-omics databases, such as The Cancer Genome Atlas (TCGA), have enriched our comprehension of this cancer type. However, given the evolution of glioma classification, retrospective databases may contain outdated annotations, suboptimal for research. To address this issue, we propose two me",cc-by-nc-nd
+40463063,Upstream open reading frame inactivation augments GATA4 translation and cardiomyocyte hypertrophy in mice,No Abstract Available,True,"bioRxiv
 
 [Preprint]. 2025 May 18:2025.05.18.654700. [Version 1] doi:
 
@@ -642,104 +454,40 @@ The Center for RNA Biology, University of Rochester School of Medicine & Dentist
 
 4
 
-The Center for Biomedical Informatics, Unive",cc-by
-40462185,No Title Available,No Abstract Available,True,"Skip to main content
+The Center for Biomedical Informatics, University of Rochester School of Medicine & Dentistry, Rochester, New York, USA 14642
 
-An official website of the United States government
+#
 
-Here's how you know
+Current affiliation and address: Department of Chemistry, University of North Carolina, Chapel Hill, NC 27599
 
-Here's how you know
+$
 
-Official websites use .gov
+Current affiliation and address: Department of Genetics, Stanford University, Stanford, CA 94304
 
-A
+Author contributions
 
-.gov
+PY launched the study, obtained the funding, and led the project. PY and OMH conceived the ideas, designed the experiments, analyzed the data, and wrote the manuscript. OMH, FJ, UB, AI, YK, SC, and JLS conducted the experimental work. FJ performed the bioinformatic analysis. OMH wrote the initial draft of this manuscript. UB, AI, JLS, YK, and PY revised and finalized the manuscript and worked on the paper revisions. FJ and CY provided technical assistance and conceptual feedback. All the authors discussed the results and had the opportunity to comment on the manuscript.
 
-website belongs to an official
-                            government organization in the United States.
+✉
 
-Secure .gov websites use HTTPS
+Correspondence to:
 
-A
+peng_yao@urmc.rochester.edu
 
-lock
+This work is licensed under a
 
-(
+Creative Commons Attribution 4.0 International License
 
-Lock
+, which allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use.
 
-Locked padlock icon
+PMC Copyright notice
 
-) or
+PMCID: PMC12132206  PMID:
 
-https://
+40463063
 
-means you've safely
-                                connected to the .gov website. Share sensitive
-                                information only on official, secure websites.
-
-Search
-
-Log in
-
-Dashboard
-
-Publications
-
-Account settings
-
-Log out
-
-Search…
-
-Search NCBI
-
-Primary site navigation
-
-Search
-
-Logged in as:
-
-Dashboard
-
-Publications
-
-Account settings
-
-Log in
-
-Search PMC Full-Text Archive
-
-Search in PMC
-
-Advanced Search
-
-Journal List
-
-User Guide
-
-New
-
-Try this search in PMC Beta Search
-
-PERMALINK
-
-Copy
-
-As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
-    the contents by NLM or the National Institutes of Health.
-
-Learn more:
-
-PMC Disclaimer
-
-|
-
-PMC Copyright Notice
-
-Genome Biol
+The complete version history of t",cc-by
+40462185,A resource for whole-body gene expression map of human tissues based on integration of single cell and bulk transcriptomics,No Abstract Available,True,"Genome Biol
 
 . 2025 Jun 3;26:152. doi:
 
@@ -1077,104 +825,110 @@ Martin Zwahlen
 
 1
 
-Science for Life",cc-by
-40458326,No Title Available,No Abstract Available,True,"Skip to main content
+Science for Life Laboratory, Department of Protein Science, KTH-Royal Institute of Technology, Stockholm, Sweden
 
-An official website of the United States government
+Find articles by
 
-Here's how you know
+Martin Zwahlen
 
-Here's how you know
+1
 
-Official websites use .gov
+,
 
-A
+Mattias Forsberg
 
-.gov
+Mattias Forsberg
 
-website belongs to an official
-                            government organization in the United States.
+1
 
-Secure .gov websites use HTTPS
+Science for Life Laboratory, Department of Protein Science, KTH-Royal Institute of Technology, Stockholm, Sweden
 
-A
+Find articles by
 
-lock
+Mattias Forsberg
 
-(
+1
 
-Lock
+,
 
-Locked padlock icon
+Fredric Johansson
 
-) or
+Fredric Johansson
 
-https://
+1
 
-means you've safely
-                                connected to the .gov website. Share sensitive
-                                information only on official, secure websites.
+Science for Life Laboratory, Department of Protein Science, KTH-Royal Institute of Technology, Stockholm, Sweden
 
-Search
+Find articles by
 
-Log in
+Fredric Johansson
 
-Dashboard
+1
 
-Publications
+,
 
-Account settings
+Jan Mulder
 
-Log out
+Jan Mulder
 
-Search…
+5
 
-Search NCBI
+Department of Neuroscience, Karolinska Institutet, Stockholm, Sweden
 
-Primary site navigation
+Find articles by
 
-Search
+Jan Mulder
 
-Logged in as:
+5
 
-Dashboard
+,
 
-Publications
+Tomas Hökfelt
 
-Account settings
+Tomas Hökfelt
 
-Log in
+5
 
-Search PMC Full-Text Archive
+Department of Neuroscience, Karolinska Institutet, Stockholm, Sweden
 
-Search in PMC
+Find articles by
 
-Advanced Search
+Tomas Hökfelt
 
-Journal List
+5
 
-User Guide
+,
 
-New
+Yonglun Luo
 
-Try this search in PMC Beta Search
+Yonglun Luo
 
-PERMALINK
+6
 
-Copy
+Steno Diabetes Center Aarhus, Aarhus University Hospital, Aarhus, Denmark
 
-As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
-    the contents by NLM or the National Institutes of Health.
+7
 
-Learn more:
+Department of Biomedicine, Aarhus University, Aarhus, Denmark
 
-PMC Disclaimer
+Find articles by
 
-|
+Yonglun Luo
 
-PMC Copyright Notice
+6,
 
-Cureus
+7
+
+,
+
+Lynn Butler
+
+Lynn Butler
+
+8
+
+Department of Clinical Medicine, The Arctic University of Norway, Troms",cc-by
+40458326,Immunotherapy-Based Combination Therapy for the Successful Treatment of Coexisting Primary and Axillary Accessory Breast Cancers: A Case Report,No Abstract Available,True,"Cureus
 
 . 2025 May 2;17(5):e83340. doi:
 
@@ -1314,4 +1068,2648 @@ Aberrant breast tissue is defined as the ectopic glandular tissue near the prima
 
 While several cases of accessory breast cancer have been reported, synchronous primary cancers in the breast and ipsilateral accessory breast remain exceedingly rare. To our knowledge, no cases have been reported in which these synchronous tumors exhibit differing histopathological subtypes.
 
-We, therefore, present a unique case of synchronous ipsilateral breast cancer and accessory breast cancer, each with a distinct subtype. The tumor in the left breast, lo",unavailable
+We, therefore, present a unique case of synchronous ipsilateral breast cancer and accessory breast cancer, each with a distinct subtype. The tumor in the left breast, located in the lower inner quadrant, exhibited a luminal-type phenotype. It was immunohistochemically positive for the estrogen and progesterone receptors (ER and PgR), negative for human epidermal growth factor receptor 2 (HER2) (score 0), and demonstrated a low Ki-67 labeling index of 3.2%. In contrast, the accessory breast tumor in the axilla displayed a triple-negative phenotype, with no expression of ER, PgR, or HER2 (score 0), and a high Ki-67 labeling index of 72.3%.
+
+Triple-negative breast cancer (TNBC) is defined by the absence of ER, PgR, and HER2 expression. TNBC represents a particularly aggressive subtype of breast cancer, often associated with a poorer prognosis and limited treatment options compared to hormone receptor-positive or HER2-positive breast cancers. In recent years, the expression of programmed death-ligand 1 (PD-L1) on tumor cells or tumor-infiltrating immune cells has emerged as an important biomarker predicting the potential effectiveness of immune checkpoint inhibitors, such as pembrolizumab. Understanding these biological characteristics is crucial for optimizing treatmen",unavailable
+40451243,Analysis-ready VCF at Biobank scale using Zarr,No Abstract Available,True,"Gigascience
+
+. 2025 Jun 2;14:giaf049. doi:
+
+10.1093/gigascience/giaf049
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+Analysis-ready VCF at Biobank scale using Zarr
+
+Eric Czech
+
+Eric Czech
+
+1
+
+Open Athena AI Foundation, 1245 Broadway, 16th Floor, New York, NY 10001, USA
+
+2
+
+Related Sciences, 1312 17th St PMB 76870, Denver, CO 80202, USA
+
+Find articles by
+
+Eric Czech
+
+1,
+
+2,
+
+b
+
+,
+
+Will Tyler
+
+Will Tyler
+
+3
+
+Independent researcher
+
+Find articles by
+
+Will Tyler
+
+3,
+
+b
+
+,
+
+Tom White
+
+Tom White
+
+4
+
+Tom White Consulting Ltd
+
+Find articles by
+
+Tom White
+
+4,
+
+b
+
+,
+
+Ben Jeffery
+
+Ben Jeffery
+
+5
+
+Big Data Institute, Li Ka Shing Centre for Health Information and Discovery, University of Oxford, Oxford, OX3 7LF, UK
+
+Find articles by
+
+Ben Jeffery
+
+5,
+
+c
+
+,
+
+Timothy R Millar
+
+Timothy R Millar
+
+6
+
+The New Zealand Institute for Plant & Food Research Ltd, 74 Gerald Street,  Lincoln 7608, New Zealand
+
+7
+
+Department of Biochemistry, School of Biomedical Sciences, University of Otago. 710 Cumberland Street, Dunedin North, Dunedin 9016, New Zealand
+
+Find articles by
+
+Timothy R Millar
+
+6,
+
+7,
+
+c
+
+,
+
+Benjamin Elsworth
+
+Benjamin Elsworth
+
+8
+
+Our Future Health, 2 New Bailey, 6 Stanley Street, Manchester M3 5GS, UK
+
+Find articles by
+
+Benjamin Elsworth
+
+8
+
+,
+
+Jérémy Guez
+
+Jérémy Guez
+
+9
+
+Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA 02142, USA
+
+10
+
+Analytic and Translational Genetics Unit, Massachusetts General Hospital, Boston, MA 02114, USA
+
+Find articles by
+
+Jérémy Guez
+
+9,
+
+10
+
+,
+
+Jonny Hancox
+
+Jonny Hancox
+
+11
+
+NVIDIA Ltd, 100 Brook Drive, Green Park, Reading RG2 6UJ, UK
+
+Find articles by
+
+Jonny Hancox
+
+11
+
+,
+
+Konrad J Karczewski
+
+Konrad J Karczewski
+
+12
+
+Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA 02142, USA
+
+13
+
+Analytic and Translational Genetics Unit, Massachusetts General Hospital, Boston, MA 02114, USA
+
+14
+
+Novo Nordisk Foundation Center for Genomic Mechanisms of Disease, Broad Institute of MIT and Harvard, Cambridge, MA 02142, USA
+
+Find articles by
+
+Konrad J Karczewski
+
+12,
+
+13,
+
+14
+
+,
+
+Alistair Miles
+
+Alistair Miles
+
+15
+
+Genomic Surveillance Unit, Wellcome Sanger Institute, Wellcome Genome Campus, Hinxton, Cambridgeshire, CB10 1SA, UK
+
+Find articles by
+
+Alistair Miles
+
+15
+
+,
+
+Sam Tallman
+
+Sam Tallman
+
+16
+
+Genomics England, One Canada Square, London, E14 5AB, UK
+
+Find articles by
+
+Sam Tallman
+
+16
+
+,
+
+Per Unneberg
+
+Per Unneberg
+
+17
+
+Department of Cell and Molecular Biology, National Bioinformatics Infrastructure Sweden, Science for Life Laboratory, Uppsala University, Husargatan 3, SE-752 37 Uppsala, Sweden
+
+Find articles by
+
+Per Unneberg
+
+17
+
+,
+
+Rafal Wojdyla
+
+Rafal Wojdyla
+
+18
+
+Open Athena AI Foundation, 1245 Broadway, 16th Floor, New York, NY 10001, USA
+
+Find articles by
+
+Rafal Wojdyla
+
+18
+
+,
+
+Shadi Zabad
+
+Shadi Zabad
+
+19
+
+School of Computer Science, McGill University, Montreal, QC, H3A 2A7, Canada
+
+Find articles by
+
+Shadi Zabad
+
+19
+
+,
+
+Jeff Hammerbacher
+
+Jeff Hammerbacher
+
+20
+
+Open Athena AI Foundation, 1245 Broadway, 16th Floor, New York, NY 10001, USA
+
+21
+
+Related Sciences, 1312 17th St PMB 76870, Denver, CO 80202, USA
+
+Find articles by
+
+Jeff Hammerbacher
+
+20,
+
+21,
+
+d
+
+,
+
+Jerome Kelleher
+
+Jerome Kelleher
+
+22
+
+Big Data Institute, Li Ka Shing Centre for Health Information and Discovery, University of Oxford, Oxford, OX3 7LF, UK
+
+Find articles by
+
+Jerome Kelleher
+
+22,
+
+d,
+
+✉
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Open Athena AI Foundation, 1245 Broadway, 16th Floor, New York, NY 10001, USA
+
+2
+
+Related Sciences, 1312 17th St PMB 76870, Denver, CO 80202, USA
+
+3
+
+Independent researcher
+
+4
+
+Tom White Consulting Ltd
+
+5
+
+Big Data Institute, Li Ka Shing Centre for Health Information and Discovery, University of Oxford, Oxford, OX3 7LF, UK
+
+6
+
+The New Zealand Institute for Plant & Food Research Ltd, 74 Gerald Street,  Lincoln 7608, New Zealand
+
+7
+
+Department of Biochemistry, School of Biomedical Sciences, University of Otago. 710 Cumberland Street, Dunedin North, Dunedin 9016, New Zealand
+
+8
+
+Our Future Health, 2 New Bailey, 6 Stanley Street, Manchester M3 5GS, UK
+
+9
+
+Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA 02142, USA
+
+10
+
+Analytic and Translational Genetics Unit, Massachusetts General Hospital, Boston, MA 02114, USA
+
+11
+
+NVIDIA Ltd, 100 Brook Drive, Green Park, Reading RG2 6UJ, UK
+
+12
+
+Program in Medical and Population Genetics, Broad Institute of MIT and Harvard, Cambridge, MA 02142, USA
+
+13
+
+Analytic and Translational Genetics Unit, Massachusetts General Hospital, Boston, MA 02114, USA
+
+14
+
+Novo Nordisk Foundation Center for Genomic Mechanisms of Disease, Broad Institute of MIT and Harvard, Cambridge, MA 02142, USA
+
+15
+
+Genomic Surveillance Unit, Wellcome Sanger Institute, Wellcome Genome Campus, Hinxton, Cambridgeshire, CB10 1SA, UK
+
+16
+
+Genomics England, One Canada Square, London, E14 5AB, UK
+
+17
+
+Department of Cell",cc-by
+40447637,CRISPR screen decodes SWI/SNF chromatin remodeling complex assembly,No Abstract Available,True,"Nat Commun
+
+. 2025 May 30;16:5011. doi:
+
+10.1038/s41467-025-60424-x
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+CRISPR screen decodes SWI/SNF chromatin remodeling complex assembly
+
+Hanna Schwaemmle
+
+Hanna Schwaemmle
+
+1
+
+Department of Genetic Medicine and Development, Faculty of Medicine, University of Geneva, Geneva, Switzerland
+
+2
+
+Institute of Genetics and Genomics in Geneva (iGE3), University of Geneva, Geneva, Switzerland
+
+Find articles by
+
+Hanna Schwaemmle
+
+1,
+
+2
+
+,
+
+Hadrien Soldati
+
+Hadrien Soldati
+
+1
+
+Department of Genetic Medicine and Development, Faculty of Medicine, University of Geneva, Geneva, Switzerland
+
+Find articles by
+
+Hadrien Soldati
+
+1
+
+,
+
+Nikolaos M R Lykoskoufis
+
+Nikolaos M R Lykoskoufis
+
+1
+
+Department of Genetic Medicine and Development, Faculty of Medicine, University of Geneva, Geneva, Switzerland
+
+Find articles by
+
+Nikolaos M R Lykoskoufis
+
+1
+
+,
+
+Mylène Docquier
+
+Mylène Docquier
+
+2
+
+Institute of Genetics and Genomics in Geneva (iGE3), University of Geneva, Geneva, Switzerland
+
+Find articles by
+
+Mylène Docquier
+
+2
+
+,
+
+Alexandre Hainard
+
+Alexandre Hainard
+
+3
+
+Proteomics Core Facility, Faculty of Medicine, University of Geneva, Geneva, Switzerland
+
+Find articles by
+
+Alexandre Hainard
+
+3
+
+,
+
+Simon M G Braun
+
+Simon M G Braun
+
+1
+
+Department of Genetic Medicine and Development, Faculty of Medicine, University of Geneva, Geneva, Switzerland
+
+2
+
+Institute of Genetics and Genomics in Geneva (iGE3), University of Geneva, Geneva, Switzerland
+
+Find articles by
+
+Simon M G Braun
+
+1,
+
+2,
+
+✉
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Department of Genetic Medicine and Development, Faculty of Medicine, University of Geneva, Geneva, Switzerland
+
+2
+
+Institute of Genetics and Genomics in Geneva (iGE3), University of Geneva, Geneva, Switzerland
+
+3
+
+Proteomics Core Facility, Faculty of Medicine, University of Geneva, Geneva, Switzerland
+
+✉
+
+Corresponding author.
+
+Received 2024 Jun 7; Accepted 2025 May 21; Collection date 2025.
+
+© The Author(s) 2025
+
+Open Access
+
+This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit
+
+http://creativecommons.org/licenses/by/4.0/
+
+.
+
+PMC Copyright notice
+
+PMCID: PMC12125367  PMID:
+
+40447637
+
+Abstract
+
+The SWI/SNF (or BAF) complex is an essential chromatin remodeler, which is frequently mutated in cancer and neurodevelopmental disorders. These are often heterozygous loss-of-function mutations, indicating a dosage-sensitive role for SWI/SNF subunits. However, the molecular mechanisms regulating SWI/SNF subunit dosage to ensure complex assembly remain largely unexplored. We performed a CRISPR KO screen, using epigenome editing in mouse embryonic stem cells, and identified
+
+Mlf2
+
+and
+
+Rbm15
+
+as regulators of SWI/SNF complex activity. First, we show that MLF2, a poorly characterized chaperone protein, promotes SWI/SNF assembly and binding to chromatin. Rapid degradation of MLF2 reduces chromatin accessibility at sites that depend on high levels of SWI/SNF binding to maintain open chromatin. Next, we find that RBM15, part of the m
+
+6
+
+A writer complex, controls m
+
+6
+
+A modifications on specific SWI/SNF mRNAs to regulate subunit protein levels. Misregulation of m
+
+6
+
+A methylation causes overexpression of core SWI/SNF subunits leading to the assembly of incomplete complexes lacking the catalytic ATPase/ARP subunits. These data indicate that targeting modulators of SWI/SNF complex assembly may offer a potent therapeutic strategy for diseases associated with impaired chromatin remodeling.
+
+Subject terms:
+
+Chromatin remodelling, Epigenomics, Gene regulation, RNA modification, Embryonic stem cells
+
+The SWI/SNF chromatin remodeling complex is frequently mutated in cancer and neurodevelopmental disorders. Here, the authors performed a CRISPR screen and identified MLF2 and RBM15 as modulators of SWI/SNF assembly, revealing new therapeutic targets for diseases caused by impaired chromatin remodeling.
+
+Introduction
+
+Accurate regulation of gene expression is essential for establishing and maintaining cell identity during embryonic development. Cell-type specific gene expression profiles are established by transcription factors (TFs) via binding to unique DNA motifs. However, TF activity is dependent on non-gene",cc-by
+40443628,"Prevalence and Genotypic Diversity of High-Risk Human Papillomavirus Among Women of Reproductive Age in Kilifi County, Kenya",No Abstract Available,True,"Cureus
+
+. 2025 Apr 29;17(4):e83191. doi:
+
+10.7759/cureus.83191
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+Prevalence and Genotypic Diversity of High-Risk Human Papillomavirus Among Women of Reproductive Age in Kilifi County, Kenya
+
+Hellen W Kariuki
+
+Hellen W Kariuki
+
+1
+
+Department of Medical Microbiology and Immunology, University of Nairobi, Nairobi, KEN
+
+Find articles by
+
+Hellen W Kariuki
+
+1,
+
+✉
+
+,
+
+Celestine K Nyamari
+
+Celestine K Nyamari
+
+2
+
+Department of Biochemistry, Microbiology and Biotechnology, Kenyatta University, Nairobi, KEN
+
+3
+
+Department of Molecular Diagnostics and Genomics, Centre for Molecular Biosciences and Genomic, Nairobi, KEN
+
+Find articles by
+
+Celestine K Nyamari
+
+2,
+
+3
+
+,
+
+Peter M Waweru
+
+Peter M Waweru
+
+4
+
+Department of Medical Physiology, Faculty of Health Sciences, University of Nairobi, Nairobi, KEN
+
+Find articles by
+
+Peter M Waweru
+
+4
+
+,
+
+Patrick M Makazi
+
+Patrick M Makazi
+
+5
+
+Department of Neglected Tropical Diseases (NTDs), County Government of Kilifi, Kilifi, KEN
+
+Find articles by
+
+Patrick M Makazi
+
+5
+
+,
+
+Marianne W Mureithi
+
+Marianne W Mureithi
+
+6
+
+Department of Medical Microbiology and Immunology, Faculty of Health Sciences, University of Nairobi, Nairobi, KEN
+
+Find articles by
+
+Marianne W Mureithi
+
+6
+
+,
+
+Wallace Bulimo
+
+Wallace Bulimo
+
+7
+
+Department of Epidemiology, Statistics and Informatics, Kenya Medical Research Institute (KEMRI), Nairobi, KEN
+
+Find articles by
+
+Wallace Bulimo
+
+7
+
+,
+
+Erick Wanjala
+
+Erick Wanjala
+
+8
+
+Department of Reproductive Health, Kilifi County Hospital, Kilifi, KEN
+
+9
+
+Department of Reproductive Health, Pwani Gyno Centre, Mombasa, KEN
+
+Find articles by
+
+Erick Wanjala
+
+8,
+
+9
+
+,
+
+Lyle McKinnon
+
+Lyle McKinnon
+
+10
+
+Department of Medical Microbiology and Infectious Diseases, University of Manitoba, Winnipeg, CAN
+
+11
+
+Mucosal Immunology Laboratory, Centre for the AIDS Programme of Research in South Africa (CAPRISA), Durban, ZAF
+
+1
+
+Department of Medical Microbiology and Immunology, University of Nairobi, Nairobi, KEN
+
+Find articles by
+
+Lyle McKinnon
+
+10,
+
+11,
+
+1
+
+,
+
+Humphrey N Kariuki
+
+Humphrey N Kariuki
+
+6
+
+Department of Medical Microbiology and Immunology, Faculty of Health Sciences, University of Nairobi, Nairobi, KEN
+
+Find articles by
+
+Humphrey N Kariuki
+
+6
+
+,
+
+Frank G Onyambu
+
+Frank G Onyambu
+
+12
+
+Department of Medical Laboratory Sciences, Meru University of Science and Technology, Meru, KEN
+
+3
+
+Department of Molecular Diagnostics and Genomics, Centre for Molecular Biosciences and Genomic, Nairobi, KEN
+
+Find articles by
+
+Frank G Onyambu
+
+12,
+
+3
+
+Editors:
+
+Alexander Muacevic
+
+,
+
+John R Adler
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Department of Medical Microbiology and Immunology, University of Nairobi, Nairobi, KEN
+
+2
+
+Department of Biochemistry, Microbiology and Biotechnology, Kenyatta University, Nairobi, KEN
+
+3
+
+Department of Molecular Diagnostics and Genomics, Centre for Molecular Biosciences and Genomic, Nairobi, KEN
+
+4
+
+Department of Medical Physiology, Faculty of Health Sciences, University of Nairobi, Nairobi, KEN
+
+5
+
+Department of Neglected Tropical Diseases (NTDs), County Government of Kilifi, Kilifi, KEN
+
+6
+
+Department of Medical Microbiology and Immunology, Faculty of Health Sciences, University of Nairobi, Nairobi, KEN
+
+7
+
+Department of Epidemiology, Statistics and Informatics, Kenya Medical Research Institute (KEMRI), Nairobi, KEN
+
+8
+
+Department of Reproductive Health, Kilifi County Hospital, Kilifi, KEN
+
+9
+
+Department of Reproductive Health, Pwani Gyno Centre, Mombasa, KEN
+
+10
+
+Department of Medical Microbiology and Infectious Diseases, University of Manitoba, Winnipeg, CAN
+
+11
+
+Mucosal Immunology Laboratory, Centre for the AIDS Programme of Research in South Africa (CAPRISA), Durban, ZAF
+
+12
+
+Department of Medical Laboratory Sciences, Meru University of Science and Technology, Meru, KEN
+
+✉
+
+Hellen W. Kariuki
+
+helleka.wambui@students.uonbi.ac.ke
+
+✉
+
+Corresponding author.
+
+Accepted 2025 Apr 29; Collection date 2025 Apr.
+
+Copyright © 2025, Kariuki et al.
+
+This is an open access article distributed under the terms of the Creative Commons Attribution License CC-BY 4.0., which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+PMC Copyright notice
+
+PMCID: PMC12121697  PMID:
+
+40443628
+
+Abstract
+
+Background
+
+Human papillomavirus (HPV) is the most common sexually transmitted infection and the primary cause of cervical cancer, a leading cause of cancer-related deaths among women in Kenya. Although many HPV infections resolve on their own, some high-risk types may persist and gradually develop into cervical cancer over several years, providing opportunities for early detection and intervention. However, in low-resource settings like Kilifi County, HPV testing is limited, and alternative screening methods like visual inspection with acetic acid (VIA) are commonly used despite their limitations.
+
+Objective
+
+Thi",unavailable
+40438793,Addressing Dietary Fiber Terminology Consistency: Insights From a Multidisciplinary Roundtable and Establishment of the Dietary Fiber Ontology Working Group,No Abstract Available,True,"Nutr Today
+
+. 2024 Nov 11;60(3):97–103. doi:
+
+10.1097/NT.0000000000000719
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+Addressing Dietary Fiber Terminology Consistency
+
+Insights From a Multidisciplinary Roundtable and Establishment of the Dietary Fiber Ontology Working Group
+
+Shavawn M Forester
+
+Shavawn M Forester
+
+,
+
+PhD, RDN
+
+1
+
+Shavawn M. Forester, PhD, RDN,
+
+serves as the chief executive officer at The Nutrient Institute, a 501(c)(3) non-profit organization committed to enhancing the quality and accessibility of food composition data. With a blend of expertise and open collaboration, she leads a team dedicated to making nutrient information reliable and easy to find at all levels, from consumers to clinical professionals to research scientists.
+
+2
+
+Emily M. Reyes, BA, BS, MA,
+
+is analytics and data scientist at Nutrient Institute. Through her work in the scientific community, Emily leverages her knowledge of the food data landscape to find new and exciting ways to structure and transform nutrition data to meet the needs of researchers and scientists.
+
+3
+
+Joanne L. Slavin, PhD, RD,
+
+is a professor in the Department of Food Science and Nutrition at the University of Minnesota–Twin Cities, College of Food, Agricultural and Natural Resource Sciences. She has authored more than 350 scientific articles on dietary fiber, carbohydrates, whole grains, protein, snacking, gut health, brain health, and sustainable agriculture. Joanne was a member of the 2010 Dietary Guidelines Advisory Committee.
+
+4
+
+George C. Fahey, Jr, PhD,
+
+is professor emeritus of Animal Sciences and Nutritional Sciences at the University of Illinois at Urbana–Champaign (UIUC). Fahey was a member of the Institute of Medicine–National Academy of Sciences committee that established recommended fiber intakes for the US population and served as UIUC’s first Kraft Foods Human Nutrition Endowed Professor. His present consulting activities include working with companies to provide state-of-the-art information about human and pet animal nutrition, dietary fiber, prebiotics, novel carbohydrates, and digestive physiology in order to produce more healthful foods for humans and dogs and cats.
+
+5
+
+Barry V. McCleary, PhD, DSc,
+
+is an adjunct professor at the University of Sydney. He founded Megazyme in 1988, through which he developed methods for measurement of β-glucan, starch, fructan, resistant starch, and dietary fiber, all of which are AOAC-, AACCI-, and ICC-validated methods. In 2021, he sold Megazyme to Neogen and founded Fibercarb Consultants. Dr McCleary retains an active interest in how enzymes and carbohydrates interact in defining quality aspects and the processing of grain, fruits, and biomass.
+
+6
+
+Graham J. King, PhD,
+
+is a professor of recombination and crop genomics at Southern Cross University, an honorary professor at the University of Nottingham, a research consultant, and macadamia farmer. Dr King has made significant contributions to characterizing genomic and experimental genetic resources while collaborating with plant breeders. He has led major national and international research consortia, generating fundamental knowledge applied to the genetic improvement of arable and horticultural crops. His current research interests are focused on understanding how plant epigenetics mediates interactions between the plant genome and the environment (GxE), recombination, and facilitating the integration of crop variation data.
+
+7
+
+Liliana Andrés-Hernández, PhD,
+
+is a data librarian at the University of Adelaide Australian Plant Phenomics Facility and the principal curator and developer of the Compositional Dietary Nutrition Ontology, which has been integrated with multiple food and biomedical ontologies including FoodOn, which is used in USDA FoodData Central. Her expertise lies in the collection, standardization, and integration of data and metadata related to plant phenotypic traits.
+
+8
+
+Damion Dooley, BA,
+
+is an ontology development lead at the Centre for Infectious Disease Genomics and One Health, Simon Fraser University. Damion led the creation of the FoodOn food ontology, which is the successor of LanguaL, a popular food composition thesaurus, and is now being used and supported by a wide variety of research and interagency data sharing projects such as USDA’s FoodData Central and the Periodic Table of Food Initiative. He founded and leads the Joint Food Ontology Workgroup to facilitate foodborne disease, agriculture, nutrition, and food science data sharing.
+
+9
+
+Naomi K. Fukagawa, MD, PhD,
+
+is the Director of the USDA ARS Beltsville Human Nutrition Research Center in Beltsville, Maryland, where she oversees the USDA’s food data system, FoodData Central. Additionally, she is a board-certified pediatrician. Dr Fukagawa has held various leadership roles, including president of the American Society for Clinical Nutrition, president of the American Society for Nutrition, vice chair of the 2010 Dietary Guidelines Advisor",cc-by-nc-nd
+40429840,Sweet Aging: Glycocalyx and Galectins in CNS Aging and Neurodegenerative Disorders,No Abstract Available,True,"Int J Mol Sci
+
+. 2025 May 14;26(10):4699. doi:
+
+10.3390/ijms26104699
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+Sweet Aging: Glycocalyx and Galectins in CNS Aging and Neurodegenerative Disorders
+
+Mohd Yaqub Mir
+
+Mohd Yaqub Mir
+
+1
+
+Epilepsy Center, Department of Clinical Science, Faculty of Medicine, Lund University, 22184 Lund, Sweden; mohd_yaqub.mir@med.lu.se
+
+Find articles by
+
+Mohd Yaqub Mir
+
+1
+
+,
+
+Adam Legradi
+
+Adam Legradi
+
+2
+
+Department of Cell Biology and Molecular Medicine, University of Szeged, H-6720 Szeged, Hungary
+
+Find articles by
+
+Adam Legradi
+
+2,
+
+*
+
+Editor:
+
+Barbara Mroczko
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Epilepsy Center, Department of Clinical Science, Faculty of Medicine, Lund University, 22184 Lund, Sweden; mohd_yaqub.mir@med.lu.se
+
+2
+
+Department of Cell Biology and Molecular Medicine, University of Szeged, H-6720 Szeged, Hungary
+
+*
+
+Correspondence:
+
+legradam@bio.u-szeged.hu
+
+; Tel./Fax.: +36-(62)-544-569
+
+Roles
+
+Barbara Mroczko
+
+:
+
+Academic Editor
+
+Received 2025 Apr 9; Revised 2025 May 7; Accepted 2025 May 12; Collection date 2025 May.
+
+© 2025 by the authors.
+
+Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (
+
+https://creativecommons.org/licenses/by/4.0/
+
+).
+
+PMC Copyright notice
+
+PMCID: PMC12111549  PMID:
+
+40429840
+
+Abstract
+
+Aging and aging-related neurodegenerative disorders, such as Alzheimer’s disease, are characterized by chronic inflammation that progressively damages nervous tissue within the central nervous system (CNS). In addition to cytokines, lectin-like carbohydrate recognition molecules play a critical role in modifying cellular communication during inflammation. Among these, galectins—particularly anti-inflammatory galectin-1 and pro-inflammatory galectin-3—stand out due to their immunological functions and specificity for N-acetyllactosamine structures. Almost every cell type within the CNS can express and recognize galectins, influencing various essential cellular functions. N-acetyllactosamines, the ligand structures recognized by galectins, are found beneath sialylated termini in protein-linked oligosaccharides. During aging, protein-linked oligosaccharide structures become shorter, exposing N-acetyllactosamines on protein surfaces, which enhances their availability as binding sites for galectins. Genomic studies indicate that the number of galectin-1- and galectin-3-expressing microglial cells increases with age- or age-related disease (Alzheimer’s disease), reflecting an aging-associated rise in galectin concentrations within the CNS. This increase parallels a rise in free N-acetyllactosamine-like ligands, suggesting that galectin-N-acetyllactosamine interactions gain prominence and play a more significant role in aging-related CNS disorders. Understanding these interactions and their molecular implications offers potential avenues for targeted therapeutic strategies in combating aging-related CNS inflammation and neurodegeneration.
+
+Keywords:
+
+aging, galectins, neuroinflammation, glycan–lectin interaction
+
+1. Introduction
+
+Aging is a complex, ever-evolving biological process that profoundly influences our cellular and neurological systems. One hallmark of aging is a subtle but persistent low-grade inflammation termed “inflammaging” [
+
+1
+
+,
+
+2
+
+,
+
+3
+
+,
+
+4
+
+]. This sterile inflammation, occurring without infection, is a key feature of the aging process and has been implicated in age-related diseases such as Alzheimer’s and Parkinson’s disease, both marked by chronic, low-level central nervous system (CNS) inflammation [
+
+3
+
+,
+
+4
+
+,
+
+5
+
+].
+
+During the aging process, levels of pro-inflammatory cytokines such as IL-1 and IL-6 increase, contributing to neuroinflammation. Evidence also suggests that certain anti-inflammatory cytokines, including transforming growth factor (TGF) and IL-1RA (interleukin-1 receptor antagonist), show elevated levels in aging [
+
+6
+
+,
+
+7
+
+,
+
+8
+
+]. These changes in cytokine levels further shape the inflammatory milieu associated with aging and its impact on the CNS.
+
+Carbohydrate-binding proteins, such as galectins, play significant roles in regulating these inflammatory events. Galectin-1 demonstrates strong anti-inflammatory properties by inducing apoptosis in activated T lymphocytes [
+
+9
+
+], while galectin-3 exhibits pro-inflammatory functions by inducing the expression of inflammatory cytokines in septic and other serious inflammatory conditions [
+
+10
+
+]. This dual functionality of galectins underscores their complex involvement in the inflammatory processes of aging.
+
+By examining these intricate mechanisms, we gain insight into how inflammation influences the aging process and age-associated diseases. Such understanding may inform targeted strategies for mitigating inflammation-driven aging effects and their neurological consequences.
+
+2. Structure of Gl",cc-by
+40429634,Characterization of the Antiproliferative and Antimetastatic Properties of Centrapalus pauciflorus Meroterpenoid Centrapalus Coumarin F,No Abstract Available,True,"Int J Mol Sci
+
+. 2025 May 8;26(10):4489. doi:
+
+10.3390/ijms26104489
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+Characterization of the Antiproliferative and Antimetastatic Properties of
+
+Centrapalus pauciflorus
+
+Meroterpenoid Centrapalus Coumarin F
+
+Hazhmat Ali
+
+Hazhmat Ali
+
+1
+
+Institute of Pharmacodynamics and Biopharmacy, University of Szeged, 6720 Szeged, Hungary; ali.hazhmat@gmail.com (H.A.); shelan.rasool@uod.ac (S.R.); petergerman1974@gmail.com (P.G.)
+
+2
+
+College of Medicine, University of Duhok, Duhok 42001, Kurdistan Region, Iraq
+
+Find articles by
+
+Hazhmat Ali
+
+1,
+
+2
+
+,
+
+Shelan Rasool
+
+Shelan Rasool
+
+1
+
+Institute of Pharmacodynamics and Biopharmacy, University of Szeged, 6720 Szeged, Hungary; ali.hazhmat@gmail.com (H.A.); shelan.rasool@uod.ac (S.R.); petergerman1974@gmail.com (P.G.)
+
+2
+
+College of Medicine, University of Duhok, Duhok 42001, Kurdistan Region, Iraq
+
+Find articles by
+
+Shelan Rasool
+
+1,
+
+2
+
+,
+
+Muhammad Bello Saidu
+
+Muhammad Bello Saidu
+
+3
+
+Institute of Pharmacognosy, University of Szeged, 6720 Szeged, Hungary; mbellosaidu11@gmail.com (M.B.S.); redei.dora.judit@szte.hu (D.R.); hohmann.judit@szte.hu (J.H.)
+
+Find articles by
+
+Muhammad Bello Saidu
+
+3
+
+,
+
+Péter Germán
+
+Péter Germán
+
+1
+
+Institute of Pharmacodynamics and Biopharmacy, University of Szeged, 6720 Szeged, Hungary; ali.hazhmat@gmail.com (H.A.); shelan.rasool@uod.ac (S.R.); petergerman1974@gmail.com (P.G.)
+
+Find articles by
+
+Péter Germán
+
+1
+
+,
+
+Gábor J Szebeni
+
+Gábor J Szebeni
+
+4
+
+Laboratory of Functional Genomics, Core Facility, HUN-REN Biological Research Centre, 6726 Szeged, Hungary; szebenigabi@gmail.com (G.J.S.); epermarion@gmail.com (E.S.)
+
+5
+
+Department of Internal Medicine, Hematology Centre, University of Szeged, 6720 Szeged, Hungary
+
+Find articles by
+
+Gábor J Szebeni
+
+4,
+
+5
+
+,
+
+Enikő Szabó
+
+Enikő Szabó
+
+4
+
+Laboratory of Functional Genomics, Core Facility, HUN-REN Biological Research Centre, 6726 Szeged, Hungary; szebenigabi@gmail.com (G.J.S.); epermarion@gmail.com (E.S.)
+
+Find articles by
+
+Enikő Szabó
+
+4
+
+,
+
+Dóra Rédei
+
+Dóra Rédei
+
+3
+
+Institute of Pharmacognosy, University of Szeged, 6720 Szeged, Hungary; mbellosaidu11@gmail.com (M.B.S.); redei.dora.judit@szte.hu (D.R.); hohmann.judit@szte.hu (J.H.)
+
+Find articles by
+
+Dóra Rédei
+
+3
+
+,
+
+Judit Hohmann
+
+Judit Hohmann
+
+3
+
+Institute of Pharmacognosy, University of Szeged, 6720 Szeged, Hungary; mbellosaidu11@gmail.com (M.B.S.); redei.dora.judit@szte.hu (D.R.); hohmann.judit@szte.hu (J.H.)
+
+6
+
+HUN-REN-USZ Biologically Active Natural Products Research Group, University of Szeged, 6720 Szeged, Hungary
+
+Find articles by
+
+Judit Hohmann
+
+3,
+
+6
+
+,
+
+István Zupkó
+
+István Zupkó
+
+1
+
+Institute of Pharmacodynamics and Biopharmacy, University of Szeged, 6720 Szeged, Hungary; ali.hazhmat@gmail.com (H.A.); shelan.rasool@uod.ac (S.R.); petergerman1974@gmail.com (P.G.)
+
+7
+
+Interdisciplinary Centre of Natural Products, University of Szeged, 6720 Szeged, Hungary
+
+Find articles by
+
+István Zupkó
+
+1,
+
+7,
+
+*
+
+Editor:
+
+Jarosław Widelski
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Institute of Pharmacodynamics and Biopharmacy, University of Szeged, 6720 Szeged, Hungary; ali.hazhmat@gmail.com (H.A.); shelan.rasool@uod.ac (S.R.); petergerman1974@gmail.com (P.G.)
+
+2
+
+College of Medicine, University of Duhok, Duhok 42001, Kurdistan Region, Iraq
+
+3
+
+Institute of Pharmacognosy, University of Szeged, 6720 Szeged, Hungary; mbellosaidu11@gmail.com (M.B.S.); redei.dora.judit@szte.hu (D.R.); hohmann.judit@szte.hu (J.H.)
+
+4
+
+Laboratory of Functional Genomics, Core Facility, HUN-REN Biological Research Centre, 6726 Szeged, Hungary; szebenigabi@gmail.com (G.J.S.); epermarion@gmail.com (E.S.)
+
+5
+
+Department of Internal Medicine, Hematology Centre, University of Szeged, 6720 Szeged, Hungary
+
+6
+
+HUN-REN-USZ Biologically Active Natural Products Research Group, University of Szeged, 6720 Szeged, Hungary
+
+7
+
+Interdisciplinary Centre of Natural Products, University of Szeged, 6720 Szeged, Hungary
+
+*
+
+Correspondence:
+
+zupko.istvan@ste.hu
+
+Roles
+
+Jarosław Widelski
+
+:
+
+Academic Editor
+
+Received 2025 Apr 16; Revised 2025 May 4; Accepted 2025 May 6; Collection date 2025 May.
+
+© 2025 by the authors.
+
+Licensee MDPI, Basel, Switzerland. This article is an open access article distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license (
+
+https://creativecommons.org/licenses/by/4.0/
+
+).
+
+PMC Copyright notice
+
+PMCID: PMC12111111  PMID:
+
+40429634
+
+Abstract
+
+The current study examined the in vitro antineoplastic potentials of centrapalus coumarin F (CCF) obtained from aerial parts of
+
+Centrapalus pauciflorus
+
+(Willd.) H.Rob. (Asteraceae). Cytotoxic activity was tested against a panel of human adherent cancer cell lines, including breast, cervical, and oropharyngeal cancer and glioblastoma. Cell cycle analyses using flow cytometry and Hoechst 33258-propidium iodide (HOPI) fluorescent double staining were used to describe the proapoptotic property o",cc-by
+40426849,"Hearts, Data, and Artificial Intelligence Wizardry: From Imitation to Innovation in Cardiovascular Care",No Abstract Available,True,"Biomedicines
+
+. 2025 Apr 23;13(5):1019. doi:
+
+10.3390/biomedicines13051019
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+Hearts, Data, and Artificial Intelligence Wizardry: From Imitation to Innovation in Cardiovascular Care
+
+Panteleimon Pantelidis
+
+Panteleimon Pantelidis
+
+1
+
+3rd Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; agoliopoulou@gmail.com (A.G.); alexisgiannak@hotmail.com (A.G.); raniakatsarou@yahoo.gr (O.K.); zisimoskostas@gmail.com (K.Z.); kalogerask@yahoo.gr (K.K.); boikono@med.uoa.gr (E.O.); gsiasos@med.uoa.gr (G.S.)
+
+2
+
+Department of Computer and Systems Sciences, Stockholm University, 16455 Stockholm, Sweden
+
+Find articles by
+
+Panteleimon Pantelidis
+
+1,
+
+2,
+
+*
+
+,
+
+Polychronis Dilaveris
+
+Polychronis Dilaveris
+
+3
+
+1st Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; hrodil1@yahoo.com (P.D.); panos.theofilis@hotmail.com (P.T.)
+
+Find articles by
+
+Polychronis Dilaveris
+
+3
+
+,
+
+Samuel Ruipérez-Campillo
+
+Samuel Ruipérez-Campillo
+
+4
+
+Department of Computer Science, ETH Zurich, 8092 Zurich, Switzerland; samuel.ruiperezcampillo@inf.ethz.ch
+
+5
+
+Department of Medicine, Stanford University, Stanford, CA 94305, USA
+
+Find articles by
+
+Samuel Ruipérez-Campillo
+
+4,
+
+5
+
+,
+
+Athina Goliopoulou
+
+Athina Goliopoulou
+
+1
+
+3rd Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; agoliopoulou@gmail.com (A.G.); alexisgiannak@hotmail.com (A.G.); raniakatsarou@yahoo.gr (O.K.); zisimoskostas@gmail.com (K.Z.); kalogerask@yahoo.gr (K.K.); boikono@med.uoa.gr (E.O.); gsiasos@med.uoa.gr (G.S.)
+
+Find articles by
+
+Athina Goliopoulou
+
+1
+
+,
+
+Alexios Giannakodimos
+
+Alexios Giannakodimos
+
+1
+
+3rd Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; agoliopoulou@gmail.com (A.G.); alexisgiannak@hotmail.com (A.G.); raniakatsarou@yahoo.gr (O.K.); zisimoskostas@gmail.com (K.Z.); kalogerask@yahoo.gr (K.K.); boikono@med.uoa.gr (E.O.); gsiasos@med.uoa.gr (G.S.)
+
+Find articles by
+
+Alexios Giannakodimos
+
+1
+
+,
+
+Panagiotis Theofilis
+
+Panagiotis Theofilis
+
+3
+
+1st Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; hrodil1@yahoo.com (P.D.); panos.theofilis@hotmail.com (P.T.)
+
+Find articles by
+
+Panagiotis Theofilis
+
+3
+
+,
+
+Raffaele De Lucia
+
+Raffaele De Lucia
+
+6
+
+2nd Division of Cardiology, Cardiac Thoracic and Vascular Department, Azienda Ospedaliero Universitaria Pisana, 56124 Pisa, Italy; r.delucia.md@gmail.com
+
+Find articles by
+
+Raffaele De Lucia
+
+6
+
+,
+
+Ourania Katsarou
+
+Ourania Katsarou
+
+1
+
+3rd Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; agoliopoulou@gmail.com (A.G.); alexisgiannak@hotmail.com (A.G.); raniakatsarou@yahoo.gr (O.K.); zisimoskostas@gmail.com (K.Z.); kalogerask@yahoo.gr (K.K.); boikono@med.uoa.gr (E.O.); gsiasos@med.uoa.gr (G.S.)
+
+Find articles by
+
+Ourania Katsarou
+
+1
+
+,
+
+Konstantinos Zisimos
+
+Konstantinos Zisimos
+
+1
+
+3rd Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; agoliopoulou@gmail.com (A.G.); alexisgiannak@hotmail.com (A.G.); raniakatsarou@yahoo.gr (O.K.); zisimoskostas@gmail.com (K.Z.); kalogerask@yahoo.gr (K.K.); boikono@med.uoa.gr (E.O.); gsiasos@med.uoa.gr (G.S.)
+
+Find articles by
+
+Konstantinos Zisimos
+
+1
+
+,
+
+Konstantinos Kalogeras
+
+Konstantinos Kalogeras
+
+1
+
+3rd Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; agoliopoulou@gmail.com (A.G.); alexisgiannak@hotmail.com (A.G.); raniakatsarou@yahoo.gr (O.K.); zisimoskostas@gmail.com (K.Z.); kalogerask@yahoo.gr (K.K.); boikono@med.uoa.gr (E.O.); gsiasos@med.uoa.gr (G.S.)
+
+Find articles by
+
+Konstantinos Kalogeras
+
+1
+
+,
+
+Evangelos Oikonomou
+
+Evangelos Oikonomou
+
+1
+
+3rd Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; agoliopoulou@gmail.com (A.G.); alexisgiannak@hotmail.com (A.G.); raniakatsarou@yahoo.gr (O.K.); zisimoskostas@gmail.com (K.Z.); kalogerask@yahoo.gr (K.K.); boikono@med.uoa.gr (E.O.); gsiasos@med.uoa.gr (G.S.)
+
+Find articles by
+
+Evangelos Oikonomou
+
+1
+
+,
+
+Gerasimos Siasos
+
+Gerasimos Siasos
+
+1
+
+3rd Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; agoliopoulou@gmail.com (A.G.); alexisgiannak@hotmail.com (A.G.); raniakatsarou@yahoo.gr (O.K.); zisimoskostas@gmail.com (K.Z.); kalogerask@yahoo.gr (K.K.); boikono@med.uoa.gr (E.O.); gsiasos@med.uoa.gr (G.S.)
+
+Find articles by
+
+Gerasimos Siasos
+
+1
+
+Editor:
+
+Celestino Sardu
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+3rd Department of Cardiology, National and Kapodistrian University of Athens, 11527 Athens, Greece; agoliopoulou@gmail.com (A.G.); alexisgiannak@hotmail.com (A.G.); raniakatsarou@yahoo.gr (O.K.); zisimoskostas@gmail.com (K.Z.); kalogerask@yahoo.gr (K.K.); boikono@med.uoa.gr (E.O.); gsiasos@med.uoa.gr (G",cc-by
+40416209,Refining Chemotherapy Decisions in Early-Stage Breast Cancer: A Comparison of MammaPrint and National Comprehensive Cancer Network (NCCN) Criteria in a Bosnian and Herzegovinian Cohort,No Abstract Available,True,"Cureus
+
+. 2025 Apr 23;17(4):e82825. doi:
+
+10.7759/cureus.82825
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+Refining Chemotherapy Decisions in Early-Stage Breast Cancer: A Comparison of MammaPrint and National Comprehensive Cancer Network (NCCN) Criteria in a Bosnian and Herzegovinian Cohort
+
+Vedad Dedic
+
+Vedad Dedic
+
+1
+
+Department of General, Abdominal and Glandular Surgery, University Clinical Center of Sarajevo, Sarajevo, BIH
+
+Find articles by
+
+Vedad Dedic
+
+1,
+
+✉
+
+,
+
+Sadat Pusina
+
+Sadat Pusina
+
+1
+
+Department of General, Abdominal and Glandular Surgery, University Clinical Center of Sarajevo, Sarajevo, BIH
+
+Find articles by
+
+Sadat Pusina
+
+1
+
+,
+
+Mirhan Salibasic
+
+Mirhan Salibasic
+
+1
+
+Department of General, Abdominal and Glandular Surgery, University Clinical Center of Sarajevo, Sarajevo, BIH
+
+Find articles by
+
+Mirhan Salibasic
+
+1
+
+,
+
+Emina Bicakcic-Filipovic
+
+Emina Bicakcic-Filipovic
+
+2
+
+Department of Oncology, University Clinical Center of Sarajevo, Sarajevo, BIH
+
+Find articles by
+
+Emina Bicakcic-Filipovic
+
+2
+
+,
+
+Emir Bicakcic
+
+Emir Bicakcic
+
+1
+
+Department of General, Abdominal and Glandular Surgery, University Clinical Center of Sarajevo, Sarajevo, BIH
+
+Find articles by
+
+Emir Bicakcic
+
+1
+
+,
+
+Naida Herenda
+
+Naida Herenda
+
+3
+
+Department of Anaesthesiology, University Clinical Center of Sarajevo, Sarajevo, BIH
+
+Find articles by
+
+Naida Herenda
+
+3
+
+,
+
+Nidzara Karup
+
+Nidzara Karup
+
+4
+
+Department of Otolaryngology, General Hospital ""Prim.dr Abdulah Nakas"", Sarajevo, BIH
+
+Find articles by
+
+Nidzara Karup
+
+4
+
+Editors:
+
+Alexander Muacevic
+
+,
+
+John R Adler
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Department of General, Abdominal and Glandular Surgery, University Clinical Center of Sarajevo, Sarajevo, BIH
+
+2
+
+Department of Oncology, University Clinical Center of Sarajevo, Sarajevo, BIH
+
+3
+
+Department of Anaesthesiology, University Clinical Center of Sarajevo, Sarajevo, BIH
+
+4
+
+Department of Otolaryngology, General Hospital ""Prim.dr Abdulah Nakas"", Sarajevo, BIH
+
+✉
+
+Vedad Dedic
+
+dedicvedad7@gmail.com
+
+✉
+
+Corresponding author.
+
+Accepted 2025 Apr 23; Collection date 2025 Apr.
+
+Copyright © 2025, Dedic et al.
+
+This is an open access article distributed under the terms of the Creative Commons Attribution License CC-BY 4.0., which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+PMC Copyright notice
+
+PMCID: PMC12100569  PMID:
+
+40416209
+
+Abstract
+
+Background
+
+Adjuvant chemotherapy decisions in early-stage, hormone receptor-positive, HER2-negative breast cancer traditionally rely on clinicopathological features such as tumor size, grade, and lymph node status. However, multigene expression assays like MammaPrint offer additional prognostic information that may alter treatment recommendations. This study aimed to assess the level of agreement between MammaPrint-based genomic risk classification and chemotherapy recommendations derived from National Comprehensive Cancer Network (NCCN)-based clinical criteria in a cohort of Bosnia and Herzegovina breast cancer patients.
+
+Methods
+
+We retrospectively analyzed 66 patients with HR+/HER2-, node-negative early breast cancer treated between 2023 and 2024. All patients underwent MammaPrint testing, which classified tumors as either low risk or high risk for distant recurrence. Clinical risk was assessed using a simplified NCCN-guided algorithm, in which chemotherapy was recommended for tumors >2 cm and/or grade three histology. The primary outcome was the rate of concordance between genomic and clinical risk classifications. Statistical analysis included descriptive summaries, cross-tabulation, and Cohen’s kappa to evaluate agreement.
+
+Results
+
+Of the 66 patients analyzed, MammaPrint classified 27 (40.9%) as high risk and 39 (59.1%) as low risk. Based on NCCN criteria, 36 patients (54.5%) were considered clinically high-risk and recommended for chemotherapy, while 30 (45.5%) were not. Concordance between genomic and clinical classifications was observed in 37 patients (56.1%), while 29 patients (43.9%) showed discordant results. The most common discordance pattern was a clinically high-risk but genomically low-risk classification, observed in 19 cases (65.5% of discordant pairs). Cohen’s kappa for agreement between methods was 0.136, indicating slight agreement beyond chance. McNemar’s test yielded a χ² value of 10.0 (p = 0.036), suggesting significant asymmetry in discordance patterns.
+
+Conclusion
+
+This study highlights a substantial rate of discordance between MammaPrint genomic risk and NCCN-based clinical risk assessment. In our cohort, reliance on clinicopathological features alone would have led to different chemotherapy recommendations in over half of the cases. These findings support the clinical utility of multigene assays in refining adjuvant treatment decisions and reducing potential overtreatment in early breast cancer.
+
+Keywords:
+
+adjuvant ",unavailable
+40416104,Epithelial-Predominant Synovial Sarcoma With a Deceptive Neuroendocrine Phenotype,No Abstract Available,True,"Cureus
+
+. 2025 Apr 25;17(4):e82988. doi:
+
+10.7759/cureus.82988
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+Epithelial-Predominant Synovial Sarcoma With a Deceptive Neuroendocrine Phenotype
+
+Rayan Rammal
+
+Rayan Rammal
+
+1
+
+Pathology, University of Pittsburgh Medical Center, Pittsburgh, USA
+
+Find articles by
+
+Rayan Rammal
+
+1
+
+,
+
+Raja Seethala
+
+Raja Seethala
+
+1
+
+Pathology, University of Pittsburgh Medical Center, Pittsburgh, USA
+
+Find articles by
+
+Raja Seethala
+
+1
+
+,
+
+Vikram Gorantla
+
+Vikram Gorantla
+
+2
+
+Oncology, University of Pittsburgh Medical Center, Pittsburgh, USA
+
+Find articles by
+
+Vikram Gorantla
+
+2
+
+,
+
+John Skaugen
+
+John Skaugen
+
+1
+
+Pathology, University of Pittsburgh Medical Center, Pittsburgh, USA
+
+Find articles by
+
+John Skaugen
+
+1
+
+,
+
+Aatur D Singhi
+
+Aatur D Singhi
+
+1
+
+Pathology, University of Pittsburgh Medical Center, Pittsburgh, USA
+
+Find articles by
+
+Aatur D Singhi
+
+1
+
+,
+
+Rana Naous
+
+Rana Naous
+
+1
+
+Pathology, University of Pittsburgh Medical Center, Pittsburgh, USA
+
+Find articles by
+
+Rana Naous
+
+1,
+
+✉
+
+Editors:
+
+Alexander Muacevic
+
+,
+
+John R Adler
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Pathology, University of Pittsburgh Medical Center, Pittsburgh, USA
+
+2
+
+Oncology, University of Pittsburgh Medical Center, Pittsburgh, USA
+
+✉
+
+Rana Naous
+
+naousr@upmc.edu
+
+✉
+
+Corresponding author.
+
+Accepted 2025 Apr 25; Collection date 2025 Apr.
+
+Copyright © 2025, Rammal et al.
+
+This is an open access article distributed under the terms of the Creative Commons Attribution License CC-BY 4.0., which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+PMC Copyright notice
+
+PMCID: PMC12103921  PMID:
+
+40416104
+
+Abstract
+
+Synovial sarcoma (SS) is a tumor of uncertain lineage with a characteristic mixture of spindled and epithelial components that is subtyped as biphasic when both spindle and epithelial components are present and as monophasic when composed solely of spindle cells. Epithelial-predominant SS is extremely rare, and neuroendocrine differentiation within this component would be exceptional. Prominent ossification is another uncommon feature in SS, thought to portend a better prognosis. The hallmark genomic alteration in SS is t(X;18;p11;q11), resulting in the formation of an oncogenic fusion gene, usually
+
+SS18(SYT):: SSX1
+
+or
+
+SS18::SSX2
+
+and rarely
+
+SS18::SSX4
+
+.
+
+We herein describe a case of an epithelial-predominant SS arising in the right inguinal soft tissue of a 62-year-old woman. The mass is discovered incidentally on imaging and is peripherally calcified and stable during the first four years of follow-up, but later doubles in size. Microscopic examination reveals an epithelial-predominant malignant neoplasm forming glands and solid sheets, embedded in a variably cellular but mostly fibrotic-looking stroma. Prominent ossification is seen peripherally. The epithelial component is high-grade and shows neuroendocrine differentiation, further confirmed by positivity for synaptophysin and INSM-1.
+
+SS18::SSX4
+
+is detected by RNA sequencing. Break-apart fluorescence in situ hybridization (FISH) performed separately on the epithelial and stromal components confirms an SS18 rearrangement, with the epithelial component additionally showing amplification of the region corresponding to the 5' end of SS18
+
+.
+
+We speculate that the latter finding could have played a role in the neuroendocrine transformation and progression of this tumor. Herein, we present a rare case of epithelial-predominant SS with unusual neuroendocrine differentiation mimicking a carcinoma.
+
+Keywords:
+
+biphasic, differentiation, epithelial-predominant, neuroendocrine, synovial sarcoma
+
+Introduction
+
+Synovial sarcoma (SS) is commonly described as a spindle cell sarcoma with a variable degree of epithelial differentiation. The majority of SSs arise in the deep soft tissue of the extremities, often juxta-articular, and usually present in young adults less than 50 years old. SS shows a specific chromosomal translocation, t(X;18;p11;q11), resulting in the formation of an oncogenic fusion gene, usually either SS18(SYT)::SSX1 or SS18::SSX2 and rarely SS18::SSX4 [
+
+1
+
+]. So far, there is no evidence of any correlation between the different fusion partners (SSX1, SSX2, and SSX4) and SS tumor morphology. SSs are classified as biphasic (spindle and epithelial components) or monophasic (most cases). When gland-forming, the epithelial cells are cuboidal or columnar, with ovoid vesicular nuclei and more abundant pale eosinophilic cytoplasm relative to the darker/blue spindle cells. Focally, the glandular component may predominate and even be confused with an adenocarcinoma. However, a scant spindle cell component is typically still present [
+
+1
+
+]. Poorly differentiated areas are much more common in the elderly [
+
+1
+
+,
+
+2
+
+] and usually portend a worse prognosis [
+
+3
+
+]. These areas can be comprised of small round hyperch",unavailable
+40415161,The association between chronic liver disease and osteoporosis in East Asian populations: a bidirectional Mendelian randomization study,No Abstract Available,True,"Aging Clin Exp Res
+
+. 2025 May 26;37(1):168. doi:
+
+10.1007/s40520-025-03031-6
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+The association between chronic liver disease and osteoporosis in East Asian populations: a bidirectional Mendelian randomization study
+
+Zhiyu Wang
+
+Zhiyu Wang
+
+1
+
+Medical College, Hubei Minzu University, 39 Xueyuan Road, Enshi, 445000 China
+
+2
+
+Huanggang Hospital of Traditional Chinese Medicine Affiliated with Hubei University of Chinese Medicine, 19 Dongmen Road, Huanggang, 438000 China
+
+Find articles by
+
+Zhiyu Wang
+
+1,
+
+2,
+
+#
+
+,
+
+Qi Qu
+
+Qi Qu
+
+1
+
+Medical College, Hubei Minzu University, 39 Xueyuan Road, Enshi, 445000 China
+
+2
+
+Huanggang Hospital of Traditional Chinese Medicine Affiliated with Hubei University of Chinese Medicine, 19 Dongmen Road, Huanggang, 438000 China
+
+Find articles by
+
+Qi Qu
+
+1,
+
+2,
+
+#
+
+,
+
+Rui Jiang
+
+Rui Jiang
+
+2
+
+Huanggang Hospital of Traditional Chinese Medicine Affiliated with Hubei University of Chinese Medicine, 19 Dongmen Road, Huanggang, 438000 China
+
+3
+
+Hubei University of Traditional Chinese Medicine, 16 Huangjiahu West Road, Wuhan, 430065 China
+
+Find articles by
+
+Rui Jiang
+
+2,
+
+3,
+
+#
+
+,
+
+Zhongshan Li
+
+Zhongshan Li
+
+2
+
+Huanggang Hospital of Traditional Chinese Medicine Affiliated with Hubei University of Chinese Medicine, 19 Dongmen Road, Huanggang, 438000 China
+
+3
+
+Hubei University of Traditional Chinese Medicine, 16 Huangjiahu West Road, Wuhan, 430065 China
+
+Find articles by
+
+Zhongshan Li
+
+2,
+
+3,
+
+✉
+
+,
+
+Simiao Ran
+
+Simiao Ran
+
+1
+
+Medical College, Hubei Minzu University, 39 Xueyuan Road, Enshi, 445000 China
+
+2
+
+Huanggang Hospital of Traditional Chinese Medicine Affiliated with Hubei University of Chinese Medicine, 19 Dongmen Road, Huanggang, 438000 China
+
+Find articles by
+
+Simiao Ran
+
+1,
+
+2,
+
+✉
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Medical College, Hubei Minzu University, 39 Xueyuan Road, Enshi, 445000 China
+
+2
+
+Huanggang Hospital of Traditional Chinese Medicine Affiliated with Hubei University of Chinese Medicine, 19 Dongmen Road, Huanggang, 438000 China
+
+3
+
+Hubei University of Traditional Chinese Medicine, 16 Huangjiahu West Road, Wuhan, 430065 China
+
+✉
+
+Corresponding author.
+
+#
+
+Contributed equally.
+
+Received 2024 Oct 30; Accepted 2025 Mar 24; Issue date 2025.
+
+© The Author(s) 2025
+
+Open Access
+
+This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License, which permits any non-commercial use, sharing, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if you modified the licensed material. You do not have permission under this licence to share adapted material derived from this article or parts of it. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit
+
+http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+.
+
+PMC Copyright notice
+
+PMCID: PMC12104098  PMID:
+
+40415161
+
+Abstract
+
+Background
+
+Chronic liver disease is a widespread health problem globally, particularly common in East Asia. Osteoporosis (OP), as a common metabolic bone disease, has also gained increasing attention in aging societies. In recent years, studies have suggested a possible association between chronic liver disease and OP, but their causal relationship has not been fully or systematically studied.
+
+Objective
+
+To investigate the causal association between chronic liver disease and OP in East Asian populations using Mendelian randomization (MR) methods.
+
+Methods
+
+The datasets for chronic hepatitis B infection (CHB), chronic hepatitis C infection (CHC), and cirrhosis were sourced from the UK Biobank, while those for hepatocellular carcinoma (HCC) and OP were from the Japan Biobank. All participants included were from East Asian populations. We first treated chronic liver disease as the exposure and OP as the outcome for MR analysis, and then performed a reverse analysis treating OP as the exposure and chronic liver disease as the outcome. The inverse variance-weighted (IVW) method was used as the primary method to calculate odds ratios (ORs) and 95% confidence intervals (95% CIs). MR-Egger and the weighted median method were used as supplementary approaches to assess the causal association between chronic liver disease and OP. Heterogeneity and pleiotropy tests were also performed to ensure the reliability of the results.
+
+Results
+
+The IVW method results indicated that CHB (ebi-a-GCST90018584) will increase the incidence of OP (bbj-a-137) (OR ",cc-by-nc-nd
+40405064,AoUPRS: A cost-effective and versatile PRS calculator for the All of Us Program,No Abstract Available,True,"BMC Genomics
+
+. 2025 May 22;26:521. doi:
+
+10.1186/s12864-025-11693-9
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+AoUPRS: A cost-effective and versatile PRS calculator for the
+
+All of Us
+
+Program
+
+Ahmed Khattab
+
+Ahmed Khattab
+
+1
+
+Integrative Structural and Computational Biology, Scripps Research, La Jolla, CA USA
+
+2
+
+Scripps Research Translational Institute, 3344 North Torrey Pines Court, Suite 300, La Jolla, CA 92037 USA
+
+Find articles by
+
+Ahmed Khattab
+
+1,
+
+2
+
+,
+
+Shang-Fu Chen
+
+Shang-Fu Chen
+
+1
+
+Integrative Structural and Computational Biology, Scripps Research, La Jolla, CA USA
+
+2
+
+Scripps Research Translational Institute, 3344 North Torrey Pines Court, Suite 300, La Jolla, CA 92037 USA
+
+Find articles by
+
+Shang-Fu Chen
+
+1,
+
+2
+
+,
+
+Nathan Wineinger
+
+Nathan Wineinger
+
+1
+
+Integrative Structural and Computational Biology, Scripps Research, La Jolla, CA USA
+
+2
+
+Scripps Research Translational Institute, 3344 North Torrey Pines Court, Suite 300, La Jolla, CA 92037 USA
+
+Find articles by
+
+Nathan Wineinger
+
+1,
+
+2
+
+,
+
+Ali Torkamani
+
+Ali Torkamani
+
+1
+
+Integrative Structural and Computational Biology, Scripps Research, La Jolla, CA USA
+
+2
+
+Scripps Research Translational Institute, 3344 North Torrey Pines Court, Suite 300, La Jolla, CA 92037 USA
+
+Find articles by
+
+Ali Torkamani
+
+1,
+
+2,
+
+✉
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Integrative Structural and Computational Biology, Scripps Research, La Jolla, CA USA
+
+2
+
+Scripps Research Translational Institute, 3344 North Torrey Pines Court, Suite 300, La Jolla, CA 92037 USA
+
+✉
+
+Corresponding author.
+
+Received 2024 Jul 12; Accepted 2025 May 9; Collection date 2025.
+
+© The Author(s) 2025
+
+Open Access
+
+This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit
+
+http://creativecommons.org/licenses/by/4.0/
+
+.
+
+PMC Copyright notice
+
+PMCID: PMC12096765  PMID:
+
+40405064
+
+Previous version available:
+
+This article is based on a previously available preprint posted on bioRxiv on July 16, 2024: ""
+
+AoUPRS: A Cost-Effective and Versatile PRS Calculator for the
+
+All of Us
+
+Program
+
+"".
+
+Abstract
+
+Background
+
+The
+
+All of Us
+
+(AoU) Research Program provides a comprehensive genomic dataset to accelerate health research and medical breakthroughs. Despite its potential, researchers face significant challenges, including high costs and inefficiencies associated with data extraction and analysis. AoUPRS addresses these challenges by offering a versatile and cost-effective tool for calculating polygenic risk scores (PRS), enabling both experienced and novice researchers to leverage the AoU dataset for large-scale genomic discoveries.
+
+Methods
+
+We evaluated three PRS models from the PGS Catalog (coronary artery disease, atrial fibrillation, and type 2 diabetes) using two distinct approaches in the Hail framework: MatrixTable (MT), a dense representation, and Variant Dataset (VDS), a sparse representation optimized for large-scale genomic data. Computational cost, resource usage, and processing time were compared. To assess the similarity of PRS performance between these two approaches, we compared odds ratios (ORs) and area under the curve (AUC). Lin’s concordance correlation coefficient (CCC) was also computed to quantify agreement between PRS scores generated by MT and VDS.
+
+Results
+
+The VDS approach reduced computational costs by up to 99.51% (e.g., from $32 to $0.036 for a 51-SNP score) while maintaining PRS estimates that were highly similar to those obtained using the MT approach. Across all three PRS models, AUC comparisons showed minimal differences between MT and VDS, indicating that both approaches yield consistent PRS performance. Agreement between PRS scores calculated by both approaches was further supported by Lin’s CCC values ranging from 0.9199 to 0.9944, confirming strong concordance. Empirical cumulative distribution function (ECDF) plots further illustrated the near-identical distribution of PRS values across methods.
+
+Conclusions
+
+AoUPRS enables efficient and cost-effective PRS computation within AoU, providing substantial cost savings while maintaining highly consistent PRS estimates. These findings support the use of AoUPRS for large-scale genomic risk assessment, making the AoU dataset more acces",cc-by
+40402457,Transposition of native chromatin for multimodal regulatory analysis and personal epigenomics,No Abstract Available,True,"Nat Methods
+
+. Author manuscript; available in PMC: 2014 Jun 1.
+
+Published in final edited form as:
+
+Nat Methods. 2013 Oct 6;10(12):1213–1218. doi:
+
+10.1038/nmeth.2688
+
+Search in PMC
+
+Search in PubMed
+
+View in NLM Catalog
+
+Add to search
+
+Transposition of native chromatin for multimodal regulatory analysis and personal epigenomics
+
+Jason D Buenrostro
+
+Jason D Buenrostro
+
+1
+
+Department of Genetics, Stanford University School of Medicine, Stanford, California 94305, USA
+
+2
+
+Howard Hughes Medical Institute, Stanford University School of Medicine, Stanford, California 94305, USA
+
+3
+
+Program in Epithelial Biology, Stanford University School of Medicine, Stanford, California 94305, USA
+
+Find articles by
+
+Jason D Buenrostro
+
+1,
+
+2,
+
+3
+
+,
+
+Paul G Giresi
+
+Paul G Giresi
+
+2
+
+Howard Hughes Medical Institute, Stanford University School of Medicine, Stanford, California 94305, USA
+
+3
+
+Program in Epithelial Biology, Stanford University School of Medicine, Stanford, California 94305, USA
+
+Find articles by
+
+Paul G Giresi
+
+2,
+
+3
+
+,
+
+Lisa C Zaba
+
+Lisa C Zaba
+
+2
+
+Howard Hughes Medical Institute, Stanford University School of Medicine, Stanford, California 94305, USA
+
+3
+
+Program in Epithelial Biology, Stanford University School of Medicine, Stanford, California 94305, USA
+
+Find articles by
+
+Lisa C Zaba
+
+2,
+
+3
+
+,
+
+Howard Y Chang
+
+Howard Y Chang
+
+2
+
+Howard Hughes Medical Institute, Stanford University School of Medicine, Stanford, California 94305, USA
+
+3
+
+Program in Epithelial Biology, Stanford University School of Medicine, Stanford, California 94305, USA
+
+Find articles by
+
+Howard Y Chang
+
+2,
+
+3
+
+,
+
+William J Greenleaf
+
+William J Greenleaf
+
+1
+
+Department of Genetics, Stanford University School of Medicine, Stanford, California 94305, USA
+
+Find articles by
+
+William J Greenleaf
+
+1
+
+Author information
+
+Article notes
+
+Copyright and License information
+
+1
+
+Department of Genetics, Stanford University School of Medicine, Stanford, California 94305, USA
+
+2
+
+Howard Hughes Medical Institute, Stanford University School of Medicine, Stanford, California 94305, USA
+
+3
+
+Program in Epithelial Biology, Stanford University School of Medicine, Stanford, California 94305, USA
+
+✉
+
+Correspondence should be addressed to W.J.G (
+
+wjg@stanford.edu
+
+) and H.Y.C (
+
+howchang@stanford.edu
+
+)
+
+Issue date 2013 Dec.
+
+PMC Copyright notice
+
+PMCID: PMC3959825  NIHMSID: NIHMS554473  PMID:
+
+24097267
+
+The publisher's version of this article is available at
+
+Nat Methods
+
+Abstract
+
+Several limitations of current epigenomic technology preclude their use in many experimental and clinical settings. Here we describe Assay for Transposase Accessible Chromatin using sequencing (ATAC-seq)— based on direct
+
+in vitro
+
+transposition of sequencing adapters into native chromatin – as a rapid and sensitive method for integrative epigenomic analysis. ATAC-seq captures open chromatin sites using a simple 2-step protocol from 500 to 50,000 cells, and reveals the interplay between genomic locations of open chromatin, DNA binding proteins, individual nucleosomes, and higher-order compaction at regulatory regions with nucleotide resolution. We discover classes of DNA binding factor that strictly avoid, can tolerate, or tend to overlap with nucleosomes. Using ATAC-seq, we measured and interpreted the serial daily epigenomes of resting human T cells from a proband via standard blood draws, demonstrating the feasibility of reading personal epigenomes in clinical timescales for monitoring health and disease.
+
+Introduction
+
+Eukaryotic genomes are hierarchically packaged into chromatin
+
+1
+
+, and the nature of this packaging plays a central role in gene regulation
+
+2
+
+,
+
+3
+
+. Major insights into the epigenetic information encoded within the nucleoprotein structure of chromatin have come from high-throughput, genome-wide methods for separately assaying the chromatin accessibility (“open chromatin”)
+
+4
+
+,
+
+5
+
+, nucleosome positioning
+
+6
+
+–
+
+8
+
+, and transcription factor (TF) occupancy
+
+9
+
+. While powerful, published protocols for existing methods require millions of cells as starting material, complex and time-consuming sample preparations, and cannot simultaneously probe the interplay of nucleosome positioning, chromatin accessibility, and TF binding. These limitations are problematic in three major ways: First, current methods can average over and “drown out” heterogeneity in cellular populations. Second, cells must often be grown
+
+ex vivo
+
+to obtain sufficient biomaterials, perturbing the
+
+in vivo
+
+context and modulating the epigenetic state in unknown ways. Third, input requirements often prevent application of these assays to well-defined clinical samples, precluding generation of “personal epigenomes” in diagnostic timescales.
+
+Here we report a robust and sensitive method for epigenomic profiling that can provide a multi-dimensional portrait of gene regulation. We use ATAC-seq to identify regions of open chromatin, identify nucleosome-bound and nucleosome-free positions in regulatory regi",unavailable
