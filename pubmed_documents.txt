@@ -1,0 +1,15 @@
+PMID: 31616143
+Title: Test Article 1 (CC-BY)
+Abstract: This is a test abstract for an article expected to be CC-BY.
+---
+PMID: 28000827
+Title: Test Article 2 (CC0)
+Abstract: This is a test abstract for an article expected to be CC0.
+---
+PMID: 30005702
+Title: Test Article 3 (Other License)
+Abstract: This is a test abstract for an article with a different license.
+---
+PMID: 12345678
+Title: Test Article 4 (Non-existent)
+Abstract: This is a test abstract for a non-existent PMID.
