@@ -118,6 +118,43 @@ def parse_license_string(license_text):
     simplified = "".join(c for c in simplified if c.isalnum() or c == '-').strip('-')
     return simplified if simplified else None
 
+# Helper function to check full text availability
+def is_full_text_available(full_text_content):
+    """
+    Checks if the full_text_content is non-empty and not a known placeholder string.
+    Returns True if text is considered available, False otherwise.
+    """
+    if not full_text_content or full_text_content.strip() == "":
+        return False
+    placeholder_strings = [
+        "[No PMCID link for full text]",
+        "[Fetching timed out]",
+        "[Metadata fetch failed]",
+        "[No content extracted or not applicable]",
+        "[Unsupported content type", # Check for prefix
+        "[PDF content not extracted]",
+        "[HTTP error", # Check for prefix
+        "[Request error]",
+        "[Error during processing]",
+        "[XML content not easily parsable to plain text]"
+    ]
+    for placeholder in placeholder_strings:
+        if placeholder.startswith("[") and placeholder.endswith("]") and full_text_content == placeholder:
+            return False
+        if full_text_content.startswith(placeholder): # For placeholders like "[Unsupported content type: ...]"
+            return False
+    return True
+
+# Helper function to check abstract availability
+def is_abstract_available(abstract_content):
+    """
+    Checks if the abstract_content is non-empty and not the 'No Abstract Available' placeholder.
+    Returns True if abstract is considered available, False otherwise.
+    """
+    if not abstract_content or abstract_content.strip() == "" or abstract_content == "No Abstract Available":
+        return False
+    return True
+
 def extract_pmcid_and_link(xml_data, pmid):
     """
     Tries to extract PMCID, a potential full-text link, and license information from the XML metadata.
@@ -424,30 +461,62 @@ def main():
             print(f"  Could not fetch metadata for PMID {pmid}.")
             full_text_content = "[Metadata fetch failed]"
 
-        is_open_access = True if pmcid and full_text_link else False
+        is_open_access = True if pmcid and full_text_link else False # Keep this as is
 
-        # For now, just print the extracted license for each article to verify.
-        if article_license:
-            print(f"  Article License: {article_license}")
-        else:
-            print(f"  Article License: [License not found or not determined]")
+        final_license_value = article_license # Initialize with the detected license
 
-        # Apply license filtering
-        if article_license and article_license in ALLOWED_LICENSES:
-            processed_articles_data.append({
-                "PMID": pmid,
-                "Title": title,
-                "Abstract": abstract,
-                "IsOpenAccess": is_open_access,
-                "FullTextContent": full_text_content if full_text_content else "[No content extracted or not applicable]",
-                "License": article_license
-            })
-            print(f"  Article {pmid} with license '{article_license}' added to dataset.")
-        else:
+        # Start of new filtering logic based on license and content availability
+        # License Handling:
+        # The script checks if a license is found. If not, it's marked 'unavailable'.
+        # If a license is found, it's checked against ALLOWED_LICENSES.
+        # Articles with unallowed licenses are filtered out.
+        if not article_license or article_license.strip() == "":
+            # Case: License is missing or empty. Mark as 'unavailable'.
+            # The article is not immediately excluded at this point.
+            # It can still be included if it has available content (full text or abstract).
+            final_license_value = "unavailable"
+            print(f"  Article {pmid}: License not found or empty, marked as 'unavailable'.")
+        elif article_license not in ALLOWED_LICENSES:
+            # Case: License is present but not in the allowed list. Exclude the article.
             filtered_out_count += 1
-            print(f"  Article {pmid} filtered out. License: '{article_license if article_license else 'Not found'}'.")
+            print(f"  Article {pmid} filtered out. Unallowed License: '{article_license}'.")
+            print("-" * 20)
+            time.sleep(0.5) # Respect API limits even when skipping
+            continue # Exclude article, proceed to the next one.
 
+        # Content Availability Check:
+        # After license check, the article's content (full text and abstract) is assessed.
+        # The article must have either available full text or an available abstract to be included.
+        full_text_is_avail = is_full_text_available(full_text_content)
+        abstract_is_avail = is_abstract_available(abstract)
 
+        if not full_text_is_avail and not abstract_is_avail:
+            # Case: Neither full text nor abstract is available. Exclude the article.
+            filtered_out_count += 1
+            reason = "No full text and no abstract available"
+            if full_text_content and full_text_content not in ["[No PMCID link for full text]", "[Metadata fetch failed]"]:
+                reason = f"Full text placeholder '{full_text_content}' and no abstract"
+            elif abstract == "No Abstract Available" and not full_text_is_avail :
+                 reason = "No abstract available and no usable full text"
+            print(f"  Article {pmid} filtered out. Reason: {reason}.")
+            print("-" * 20)
+            time.sleep(0.5) # Respect API limits even when skipping
+            continue # Exclude article, proceed to the next one.
+
+        # Article Inclusion Criteria:
+        # An article is included if it meets the following conditions:
+        # 1. Its license is either in ALLOWED_LICENSES OR was marked as 'unavailable' (originally missing/empty).
+        # AND
+        # 2. It has available full text OR an available abstract.
+        processed_articles_data.append({
+            "PMID": pmid,
+            "Title": title,
+            "Abstract": abstract, # Store original abstract
+            "IsOpenAccess": is_open_access,
+            "FullTextContent": full_text_content if full_text_content else "[No content extracted or not applicable]",
+            "License": final_license_value # Use the final_license_value
+        })
+        print(f"  Article {pmid} (License: '{final_license_value}') added to dataset. Full text available: {full_text_is_avail}, Abstract available: {abstract_is_avail}.")
         print("-" * 20)
 
         # Respect NCBI API usage guidelines
@@ -465,7 +534,8 @@ def main():
                 writer.writerow(article_data)
         print(f"\nSuccessfully wrote {len(processed_articles_data)} articles to {csv_file_path}")
         if filtered_out_count > 0:
-            print(f"Filtered out {filtered_out_count} articles due to non-allowed licenses.")
+            # Update print statement for more general filtering
+            print(f"Filtered out {filtered_out_count} articles due to license or content availability criteria.")
     except IOError:
         print(f"Error: Could not write to CSV file {csv_file_path}")
     except Exception as e:
