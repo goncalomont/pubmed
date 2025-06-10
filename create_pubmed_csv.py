@@ -8,49 +8,61 @@ from bs4 import BeautifulSoup
 # Set your email for NCBI Entrez
 Entrez.email = "apitest@example.com"  # Replace with a valid email
 
-def parse_pubmed_documents(filepath="pubmed_documents.txt"):
+def search_pubmed_and_fetch_details(search_term, max_articles=20):
     """
-    Parses the pubmed_documents.txt file and returns a list of articles.
-    Each article is a dictionary with 'PMID', 'Title', and 'Abstract'.
+    Searches PubMed for a given term, fetches article details (PMID, Title, Abstract)
+    for the specified maximum number of articles.
+    Returns a list of dictionaries: [{'PMID': pmid, 'Title': title, 'Abstract': abstract}, ...]
     """
     articles = []
+    print(f"Searching PubMed for '{search_term}' (max {max_articles} articles)...")
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            content = f.read()
+        # Use Entrez.esearch to get PMIDs
+        handle = Entrez.esearch(db="pubmed", term=search_term, retmax=str(max_articles))
+        search_results = Entrez.read(handle)
+        handle.close()
+        pmids = search_results["IdList"]
 
-        raw_articles = content.strip().split("---\n")
+        if not pmids:
+            print("No articles found for the search term.")
+            return articles
 
-        for raw_article in raw_articles:
-            if not raw_article.strip():
-                continue
+        print(f"Found {len(pmids)} PMIDs. Fetching details...")
 
-            article_data = {}
-            lines = raw_article.strip().split("\n")
+        for i, pmid in enumerate(pmids):
+            print(f"  Fetching details for PMID {pmid} ({i+1}/{len(pmids)})...")
+            try:
+                # Use Entrez.efetch to get article details in Medline format
+                fetch_handle = Entrez.efetch(db="pubmed", id=pmid, rettype="medline", retmode="text")
+                medline_text = fetch_handle.read()
+                fetch_handle.close()
 
-            for line in lines:
-                if line.startswith("PMID:"):
-                    article_data["PMID"] = line.replace("PMID:", "").strip()
-                elif line.startswith("Title:"):
-                    article_data["Title"] = line.replace("Title:", "").strip()
-                elif line.startswith("Abstract:"):
-                    # Handle multi-line abstracts if they were to occur
-                    current_abstract = line.replace("Abstract:", "").strip()
-                    if "Abstract" in article_data:
-                         article_data["Abstract"] += " " + current_abstract
-                    else:
-                        article_data["Abstract"] = current_abstract
+                # Parse Medline text
+                # Medline.parse returns an iterator, so we expect one record
+                medline_records = Medline.parse(medline_text)
+                record = next(medline_records, None)
 
-            if "PMID" in article_data and "Title" in article_data and "Abstract" in article_data:
-                articles.append(article_data)
-            else:
-                print(f"Warning: Could not parse a record properly. Content: {raw_article}")
+                if record:
+                    title = record.get("TI", "No Title Available")
+                    abstract = record.get("AB", "No Abstract Available")
+                    articles.append({"PMID": pmid, "Title": title, "Abstract": abstract})
+                else:
+                    print(f"    Warning: Could not parse Medline record for PMID {pmid}")
+                    articles.append({"PMID": pmid, "Title": "Error parsing Medline", "Abstract": "Error parsing Medline"})
 
-    except FileNotFoundError:
-        print(f"Error: File not found - {filepath}")
-        return []
-    except Exception as e:
-        print(f"Error parsing {filepath}: {e}")
-        return []
+                time.sleep(0.34) # NCBI API rate limit (3 requests per second without API key)
+
+            except Exception as e_fetch:
+                print(f"    Error fetching or parsing details for PMID {pmid}: {e_fetch}")
+                # Optionally add a placeholder or skip
+                articles.append({"PMID": pmid, "Title": "Error fetching details", "Abstract": str(e_fetch)})
+                time.sleep(0.34) # Still sleep to avoid overwhelming the server after an error
+
+        print(f"Successfully fetched details for {len(articles)} articles.")
+
+    except Exception as e_search:
+        print(f"Error during PubMed search or initial fetch: {e_search}")
+
     return articles
 
 def fetch_article_metadata(pmid):
@@ -283,12 +295,18 @@ def extract_license_from_html(soup, pmid):
 def main():
     ALLOWED_LICENSES = ["cc0", "cc-by", "cc-by-sa", "cc-by-nc-nd"] # Define allowed licenses
 
-    parsed_articles = parse_pubmed_documents()
+    # Call the new function to search PubMed and fetch initial details
+    search_term = "open access genomics AND human" # Example search term
+    max_results = 20 # Fetch up to 20 articles
+
+    # Replace parse_pubmed_documents with search_pubmed_and_fetch_details
+    parsed_articles = search_pubmed_and_fetch_details(search_term, max_articles=max_results)
+
     if not parsed_articles:
-        print("No articles parsed from pubmed_documents.txt. Exiting.")
+        print(f"No articles fetched from PubMed for search term '{search_term}'. Exiting.")
         return
 
-    print(f"Found {len(parsed_articles)} articles in pubmed_documents.txt. Fetching metadata...\n")
+    print(f"Fetched {len(parsed_articles)} articles from PubMed for search term '{search_term}'. Now processing for further metadata...\n")
 
     # Process all articles
     articles_to_process = parsed_articles
