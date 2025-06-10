@@ -1,665 +1,290 @@
-from Bio import Entrez, Medline
-import time
-import xml.etree.ElementTree as ET
-import csv
+import logging
+from Bio import Entrez
+import pandas as pd
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
+import warnings
+from dateutil import parser
+import re
+from calendar import month_name, month_abbr
 import requests
-from bs4 import BeautifulSoup
+import time
 
-# Set your email for NCBI Entrez
-Entrez.email = "apitest@example.com"  # Replace with a valid email
-
-def search_pubmed_and_fetch_details(search_term, max_articles=20):
-    """
-    Searches PubMed for a given term, fetches article details (PMID, Title, Abstract)
-    for the specified maximum number of articles.
-    Returns a list of dictionaries: [{'PMID': pmid, 'Title': title, 'Abstract': abstract}, ...]
-    """
-    articles = []
-    print(f"Searching PubMed for '{search_term}' (max {max_articles} articles)...")
-    try:
-        # Use Entrez.esearch to get PMIDs
-        handle = Entrez.esearch(db="pubmed", term=search_term, retmax=str(max_articles))
-        search_results = Entrez.read(handle)
-        handle.close()
-        pmids = search_results["IdList"]
-
-        if not pmids:
-            print("No articles found for the search term.")
-            return articles
-
-        print(f"Found {len(pmids)} PMIDs. Fetching details...")
-
-        for i, pmid in enumerate(pmids):
-            print(f"  Fetching details for PMID {pmid} ({i+1}/{len(pmids)})...")
-            try:
-                # Use Entrez.efetch to get article details in Medline format
-                fetch_handle = Entrez.efetch(db="pubmed", id=pmid, rettype="medline", retmode="text")
-                medline_text = fetch_handle.read()
-                fetch_handle.close()
-
-                # Parse Medline text
-                # Medline.parse returns an iterator, so we expect one record
-                medline_records = Medline.parse(medline_text)
-                record = next(medline_records, None)
-
-                if record:
-                    title = record.get("TI", "No Title Available")
-                    abstract = record.get("AB", "No Abstract Available")
-                    authors = record.get("AU", record.get("FAU", [])) # Extract authors
-                    articles.append({"PMID": pmid, "Title": title, "Abstract": abstract, "Authors": authors})
-                else:
-                    print(f"    Warning: Could not parse Medline record for PMID {pmid}")
-                    articles.append({"PMID": pmid, "Title": "Error parsing Medline", "Abstract": "Error parsing Medline", "Authors": []})
-
-                time.sleep(0.34) # NCBI API rate limit (3 requests per second without API key)
-
-            except Exception as e_fetch:
-                print(f"    Error fetching or parsing details for PMID {pmid}: {e_fetch}")
-                # Optionally add a placeholder or skip
-                articles.append({"PMID": pmid, "Title": "Error fetching details", "Abstract": str(e_fetch)})
-                time.sleep(0.34) # Still sleep to avoid overwhelming the server after an error
-
-        print(f"Successfully fetched details for {len(articles)} articles.")
-
-    except Exception as e_search:
-        print(f"Error during PubMed search or initial fetch: {e_search}")
-
-    return articles
-
-def fetch_article_metadata(pmid):
-    """
-    Fetches detailed metadata for a given PMID from PubMed using efetch.
-    Returns the XML response as a string.
-    """
-    try:
-        handle = Entrez.efetch(db="pubmed", id=pmid, rettype="full", retmode="xml")
-        xml_data = handle.read()
-        handle.close()
-        return xml_data
-    except Exception as e:
-        print(f"Error fetching metadata for PMID {pmid}: {e}")
-        return None
-
-def parse_license_string(license_text):
-    """
-    Parses a license string or URL to a short license identifier.
-    e.g., "https://creativecommons.org/licenses/by/4.0/" -> "cc-by"
-    """
-    if not license_text:
-        return None
-    license_text = license_text.lower()
-    if "creativecommons.org/licenses/by-nc-nd/" in license_text:
-        return "cc-by-nc-nd"
-    elif "creativecommons.org/licenses/by-nc-sa/" in license_text:
-        return "cc-by-nc-sa"
-    elif "creativecommons.org/licenses/by-nd/" in license_text:
-        return "cc-by-nd"
-    elif "creativecommons.org/licenses/by-sa/" in license_text:
-        return "cc-by-sa"
-    elif "creativecommons.org/licenses/by-nc/" in license_text:
-        return "cc-by-nc"
-    elif "creativecommons.org/licenses/by/" in license_text: # Must be after more specific "by-" versions
-        return "cc-by"
-    elif "creativecommons.org/publicdomain/zero/" in license_text or "creativecommons.org/publicdomain/mark/" in license_text:
-        return "cc0"
-    # Add more specific parsing rules if needed
-    # For now, return a generic part if it's a URL or a simplified string
-    if "http" in license_text:
-        try:
-            # Try to get path part
-            path = license_text.split("://")[1].split("/")
-            if len(path) > 2: # e.g. creativecommons.org/licenses/by/4.0 -> by
-                return path[2]
-        except IndexError:
-            pass # Fall through
-
-    # Fallback for non-URL or unparsed URLs
-    # Remove common terms and simplify
-    simplified = license_text.replace("license", "").replace("public", "").replace("domain","").replace("creative commons","").strip()
-    simplified = "".join(c for c in simplified if c.isalnum() or c == '-').strip('-')
-    return simplified if simplified else None
-
-# Helper function to check full text availability
-def is_full_text_available(full_text_content):
-    """
-    Checks if the full_text_content is non-empty and not a known placeholder string.
-    Returns True if text is considered available, False otherwise.
-    """
-    if not full_text_content or full_text_content.strip() == "":
-        return False
-    placeholder_strings = [
-        "[No PMCID link for full text]",
-        "[Fetching timed out]",
-        "[Metadata fetch failed]",
-        "[No content extracted or not applicable]",
-        "[Unsupported content type", # Check for prefix
-        "[PDF content not extracted]",
-        "[HTTP error", # Check for prefix
-        "[Request error]",
-        "[Error during processing]",
-        "[XML content not easily parsable to plain text]"
+# Configure logging at the start
+logging.basicConfig(
+    level=logging.INFO,  # Set minimum log level to INFO to capture progress messages
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('pubmed_parser.log'),  # Log to a file
+        logging.StreamHandler()  # Log to console
     ]
-    for placeholder in placeholder_strings:
-        if placeholder.startswith("[") and placeholder.endswith("]") and full_text_content == placeholder:
-            return False
-        if full_text_content.startswith(placeholder): # For placeholders like "[Unsupported content type: ...]"
-            return False
-    return True
+)
+logger = logging.getLogger(__name__)
 
-# Helper function to check abstract availability
-def is_abstract_available(abstract_content):
-    """
-    Checks if the abstract_content is non-empty and not the 'No Abstract Available' placeholder.
-    Returns True if abstract is considered available, False otherwise.
-    """
-    if not abstract_content or abstract_content.strip() == "" or abstract_content == "No Abstract Available":
-        return False
-    return True
+# Suppress XMLParsedAsHTMLWarning
+warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 
-def extract_pmcid_and_link(xml_data, pmid):
-    """
-    Tries to extract PMCID, a potential full-text link, and license information from the XML metadata.
-    Returns: (pmcid, full_text_link, license_from_xml)
-    """
-    pmcid = None
-    full_text_link = None
-    license_from_xml = None
+# Set email (required by NCBI and Unpaywall APIs)
+Entrez.email = "casa5@ferring.com"
+UNPAYWALL_EMAIL = "casa5@ferring.com"
 
-    if not xml_data:
-        return pmcid, full_text_link, license_from_xml
-
+# Function to fetch license and open access information from Unpaywall
+def get_unpaywall_info(doi, email):
+    if not doi:
+        logger.warning("DOI not provided.")
+        return None, None, None, None
+    url = f"https://api.unpaywall.org/v2/{doi}?email={email}"
     try:
-        root = ET.fromstring(xml_data)
-        # Find PMCID
-        # Common locations for PMCID
-        pmcid_element = root.find(".//ArticleId[@IdType='pmc']")
-        if pmcid_element is not None and pmcid_element.text:
-            pmcid = pmcid_element.text
-            if not pmcid.startswith("PMC"):
-                pmcid = "PMC" + pmcid # Ensure it has PMC prefix
-            full_text_link = f"https://www.ncbi.nlm.nih.gov/pmc/articles/{pmcid}/"
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            try:
+                result = response.json()
+                if not result or not isinstance(result, dict):
+                    logger.warning(f"Empty or invalid API response for DOI {doi}")
+                    return None, None, None, None
+                oa_status = result.get("is_oa", False)
+                oa_status_str = "Open Access" if oa_status else "Closed Access"
+                oa_type = result.get("oa_status", "")
+                # Extract license from best_oa_location or oa_locations
+                license = None
+                best_oa_location = result.get("best_oa_location", {})
+                if best_oa_location:
+                    license = best_oa_location.get("license", None)
+                if not license:
+                    # Fallback to other oa_locations
+                    for location in result.get("oa_locations", []):
+                        if location.get("license"):
+                            license = location.get("license")
+                            break
+                license = license or ""
+                best_oa_url = best_oa_location.get("url", "") if best_oa_location else ""
+                if oa_status and not license:
+                    logger.warning(f"No license was found for DOI {doi} (OA: {oa_status})")
+                return oa_status_str, oa_type, license, best_oa_url
+            except ValueError:
+                logger.warning(f"Invalid JSON response for DOI {doi}")
+                return None, None, None, None
         else:
-            # Fallback: sometimes PMCID is within MedlineCitation/Article/ArticleIdList
-            article_id_list = root.find(".//MedlineCitation/Article/ArticleIdList")
-            if article_id_list is not None:
-                for aid in article_id_list.findall("ArticleId"):
-                    if aid.get("IdType") == "pmc" and aid.text:
-                        pmcid = aid.text
-                        if not pmcid.startswith("PMC"):
-                             pmcid = "PMC" + pmcid
-                        full_text_link = f"https://www.ncbi.nlm.nih.gov/pmc/articles/{pmcid}/"
-                        break
-    except ET.ParseError as e:
-        print(f"Error parsing XML for PMID {pmid}: {e}")
+            logger.warning(f"HTTP Error {response.status_code} when querying Unpaywall API for DOI {doi}")
+            return None, None, None, None
     except Exception as e:
-        print(f"An unexpected error occurred during XML parsing for PMID {pmid}: {e}")
+        logger.error(f"Error querying Unpaywall for DOI {doi}: {e}")
+        return None, None, None, None
+    finally:
+        time.sleep(0.1)  # Respect Unpaywall rate limits (10 requests/second)
 
-    # Try to find license information
+# Set Query filters based on MeSH and Article Type
+MeSH_QUERY = ("Neoplasms[MeSH Terms] OR Cardiovascular Diseases[MeSH Terms] OR "
+              "Diabetes Mellitus[MeSH Terms] OR Respiratory Tract Diseases[MeSH Terms] OR "
+              "Nervous System Diseases[MeSH Terms] OR Reproductive Health[MeSH Terms] OR "
+              "Gynecology[MeSH Terms] OR Obstetrics[MeSH Terms] OR Maternal Health[MeSH Terms]")
+
+ARTICLE_TYPE_FILTERS = ("clinical trial[pt] OR randomized controlled trial[pt] OR meta-analysis[pt] OR "
+                       "systematic review[pt] OR observational study[pt] OR review[pt] OR "
+                       "case reports[pt] OR practice guideline[pt]")  
+query = f"({MeSH_QUERY}) AND ({ARTICLE_TYPE_FILTERS})"
+
+# Step 1: Search PubMed
+try:
+    logger.info("Running PubMed search...")
+    search_handle = Entrez.esearch(db="pubmed", term=query, retmax=200, sort="relevance")
+    search_results = Entrez.read(search_handle)
+    search_handle.close()
+    pmids = search_results["IdList"]
+    logger.info(f"Found {len(pmids)} PMIDs: {pmids}")
+    if not pmids:
+        logger.warning("No results found for the query provided.")
+except Exception as e:
+    logger.error(f"Error searching PubMed: {str(e)}")
+    pmids = []
+
+# Step 2: Fetch full records in XML format
+
+data = []
+if pmids:
     try:
-        if root is not None: # Ensure root was parsed
-            # Look for <license> tag often under <permissions>
-            permissions_node = root.find(".//permissions")
-            if permissions_node is not None:
-                license_node = permissions_node.find(".//license")
-                if license_node is not None:
-                    # Check for <license_ref> first (often a URL)
-                    license_ref_node = license_node.find(".//license_ref")
-                    if license_ref_node is not None and license_ref_node.text:
-                        license_from_xml = parse_license_string(license_ref_node.text)
-                    # If no <license_ref>, check text content of <license> itself
-                    elif license_node.text and license_node.text.strip():
-                         license_from_xml = parse_license_string(license_node.text.strip())
-
-                # Fallback: Check for license_ref directly under permissions if no license tag
-                if not license_from_xml:
-                    license_ref_node = permissions_node.find(".//license_ref")
-                    if license_ref_node is not None and license_ref_node.text:
-                        license_from_xml = parse_license_string(license_ref_node.text)
-
-            # Broader search if not found under <permissions>
-            if not license_from_xml:
-                license_node = root.find(".//license") # More general search
-                if license_node is not None:
-                    license_ref_node = license_node.find(".//license_ref")
-                    if license_ref_node is not None and license_ref_node.text:
-                        license_from_xml = parse_license_string(license_ref_node.text)
-                    elif license_node.text and license_node.text.strip():
-                        license_from_xml = parse_license_string(license_node.text.strip())
-
-            if not license_from_xml:
-                # Some articles might have license info directly in <article-meta>
-                article_meta = root.find(".//article-meta")
-                if article_meta is not None:
-                    permissions = article_meta.find("permissions")
-                    if permissions is not None:
-                        license_p = permissions.find("license/p") # e.g. JATS format <license><p>...</p></license>
-                        if license_p is not None and license_p.text:
-                             license_from_xml = parse_license_string(license_p.text)
-                        if not license_from_xml: # Check for <license_ref> inside <license> within <permissions>
-                            license_ref_in_permissions = permissions.find("license/license_ref")
-                            if license_ref_in_permissions is not None and license_ref_in_permissions.text:
-                                license_from_xml = parse_license_string(license_ref_in_permissions.text)
-
-
-            if license_from_xml:
-                print(f"  License from XML (parsed): {license_from_xml}")
-
+        fetch_handle = Entrez.efetch(db="pubmed", id=",".join(pmids), rettype="xml", retmode="xml")
+        articles = Entrez.read(fetch_handle)
+        fetch_handle.close()
     except Exception as e:
-        # Don't let license extraction errors stop PMCID/link extraction
-        print(f"Error extracting license from XML for PMID {pmid}: {e}")
+        logger.error(f"Error fetching or reading records: {e}")
+        articles = {'PubmedArticle': []}
+else:
+    articles = {'PubmedArticle': []}
+    
 
+# Step 3: Parse Articles
 
-    return pmcid, full_text_link, license_from_xml
-
-def extract_license_from_html(soup, pmid):
-    """
-    Extracts license information from HTML soup by looking for Creative Commons links.
-    Returns a short license string (e.g., "cc-by", "cc0") or None.
-    """
-    if not soup:
-        return None
-
-    license_found = None
+data = []
+for article in articles['PubmedArticle']:
+    article_data = {}
     try:
-        # Common Creative Commons patterns
-        # Example: <a href="http://creativecommons.org/licenses/by/4.0/">
-        # Example: <a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/">
+        citation = article["MedlineCitation"]
+        article_data["PMID"] = str(citation.get("PMID", ""))
 
-        # Prioritize links with rel="license"
-        license_links = soup.find_all('a', rel='license')
-        if not license_links:
-            # Fallback: search all 'a' tags that contain 'creativecommons.org' in their href
-            license_links = soup.find_all('a', href=lambda href: href and 'creativecommons.org' in href.lower())
+        # Article ID Metadata (DOI, DOI link, PMC)
+        article_data["DOI"] = None
+        article_data["DOI_Link"] = None
+        article_data["PMC_Link"] = None
+        for aid in article["PubmedData"]["ArticleIdList"]:
+            id_type = aid.attributes["IdType"]
+            if id_type == "doi":
+                article_data["DOI"] = str(aid)
+                article_data["DOI_Link"] = f"https://doi.org/{aid}"
+            elif id_type == "pmc":
+                pmc_id = str(aid)
+                article_data["PMC_Link"] = f"https://www.ncbi.nlm.nih.gov/pmc/articles/{pmc_id}/"
 
-        for link in license_links: # This loop will now only process pre-filtered CC links or rel=license links
-            href = link.get('href', '').lower()
-            # Ensure we only parse actual Creative Commons links here, or rel="license"
-            if 'creativecommons.org' in href or link.get('rel') == ['license']:
-                parsed_license = parse_license_string(href)
-                if parsed_license:
-                    # Take the first valid one found
-                    license_found = parsed_license
-                    print(f"    License from HTML (PMID {pmid}): {href} -> {license_found}")
-                    break
+     # Article bibliographic Metadata
+        article_data["Title"] = citation["Article"].get("ArticleTitle", "")
 
-        # If no specific CC link found through href, check for common license text in footer or license sections
-        # This is a more heuristic approach and might need refinement
-        if not license_found:
-            # Look for elements that might contain license text
-            # Common class names: 'license', 'footer-license', 'copyright-license'
-            # Common tag types: div, p, span, footer
-            possible_license_elements = soup.find_all(['div', 'p', 'span', 'footer'],
-                                                      class_=['license', 'footer-license', 'copyright-license', 'licenses'])
+        if "Abstract" in citation["Article"]:
+            abstract_text = citation["Article"]["Abstract"].get("AbstractText", [])
+            abstract_parts = []
+            if isinstance(abstract_text, list):
+                for part in abstract_text:
+                    label = part.attributes.get("Label", "") if hasattr(part, "attributes") else ""
+                    text = str(part)
+                    if text:
+                        soup = BeautifulSoup(text, "html.parser")
+                        clean_text = soup.get_text().strip()
+                        if label and clean_text:
+                            abstract_parts.append(f"{label}: {clean_text}")
+                        elif clean_text:
+                            abstract_parts.append(clean_text)
+            elif isinstance(abstract_text, str) and abstract_text.strip():
+                soup = BeautifulSoup(abstract_text, "html.parser")
+                clean_text = soup.get_text().strip()
+                abstract_parts.append(clean_text)
+            article_data["Abstract"] = " ".join(abstract_parts) if abstract_parts else ""
+        else:
+            article_data["Abstract"] = ""
 
-            # Also check for elements with id containing 'license'
-            for id_val in ['license', 'licenses', 'copyright-license']:
-                el = soup.find(id=lambda x: x and id_val in x.lower())
-                if el:
-                    possible_license_elements.append(el)
+        if "Journal" not in citation["Article"] or citation["Article"]["Journal"] is None:
+            logger.warning(f"Journal missing or None for PMID {article_data['PMID']}. Setting related fields to empty.")
+            article_data["Journal"] = ""
+            article_data["Volume"] = ""
+            article_data["Issue"] = ""
+            article_data["PubDate"] = ""
+            article_data["PublicationYear"] = ""
+            article_data["PublicationMonth"] = ""
+            article_data["PublicationDay"] = ""
+        else:
+            article_data["Journal"] = citation["Article"]["Journal"].get("Title", "")
 
-            for element in possible_license_elements:
-                text_content = element.get_text(separator=" ").lower()
-                # Simple check for common license phrases if not a URL
-                if "cc-by-nc-nd" in text_content or "creative commons attribution-noncommercial-noderivatives" in text_content:
-                    license_found = "cc-by-nc-nd"
-                    break
-                elif "cc-by-nc-sa" in text_content or "creative commons attribution-noncommercial-sharealike" in text_content:
-                    license_found = "cc-by-nc-sa"
-                    break
-                elif "cc-by-nd" in text_content or "creative commons attribution-noderivatives" in text_content:
-                    license_found = "cc-by-nd"
-                    break
-                elif "cc-by-sa" in text_content or "creative commons attribution-sharealike" in text_content:
-                    license_found = "cc-by-sa"
-                    break
-                elif "cc-by-nc" in text_content or "creative commons attribution-noncommercial" in text_content: # must be after -nd and -sa
-                    license_found = "cc-by-nc"
-                    break
-                elif "cc-by" in text_content or "creative commons attribution" in text_content : # must be after other by- variants
-                    license_found = "cc-by"
-                    break
-                elif "cc0" in text_content or "public domain zero" in text_content or "public domain mark" in text_content:
-                    license_found = "cc0"
-                    break
-            if license_found and not any(href_link in str(element) for href_link in ["creativecommons.org", "license"]): # Avoid re-logging if found via text but was in a link
-                 print(f"    License from HTML text (PMID {pmid}): {license_found}")
+            journal_issue = citation["Article"]["Journal"].get("JournalIssue", {})
+            article_data["Volume"] = journal_issue.get("Volume", "")  
+            article_data["Issue"] = journal_issue.get("Issue", "")
 
+        # Publication Date Handling
+        pub_date = journal_issue.get("PubDate", {})
+        year = pub_date.get("Year", "")
+        month = pub_date.get("Month", "")
+        day = pub_date.get("Day", "")
 
-    except Exception as e:
-        print(f"    Error extracting license from HTML for PMID {pmid}: {e}")
-
-    return license_found
-
-def main():
-    ALLOWED_LICENSES = ["cc0", "cc-by", "cc-by-sa", "cc-by-nc-nd"] # Define allowed licenses
-
-    # Call the new function to search PubMed and fetch initial details
-    search_term = "open access genomics AND human" # Example search term
-    max_results = 20 # Fetch up to 20 articles
-
-    # Replace parse_pubmed_documents with search_pubmed_and_fetch_details
-    parsed_articles = search_pubmed_and_fetch_details(search_term, max_articles=max_results)
-
-    if not parsed_articles:
-        print(f"No articles fetched from PubMed for search term '{search_term}'. Exiting.")
-        return
-
-    print(f"Fetched {len(parsed_articles)} articles from PubMed for search term '{search_term}'. Now processing for further metadata...\n")
-
-    # Process all articles
-    articles_to_process = parsed_articles
-    # print(f"Processing the first {len(articles_to_process)} articles for this test run.\n") # Comment out or remove test line
-
-    processed_articles_data = [] # To store data for CSV writing
-    filtered_out_count = 0 # Counter for filtered articles
-
-    for i, article_info in enumerate(articles_to_process):
-        pmid = article_info.get("PMID")
-        title = article_info.get("Title", "No title found")
-        abstract = article_info.get("Abstract", "No abstract found")
-        authors = article_info.get("Authors", []) # Retrieve authors
-
-        if not pmid:
-            print("Skipping article with no PMID.")
-            continue
-
-        print(f"Processing article {i+1}/{len(articles_to_process)}: PMID {pmid}")
-        xml_data = fetch_article_metadata(pmid)
-
-        pmcid = None
-        full_text_link = None
-        full_text_content = "" # Default to empty string
-
-        article_license = None # Initialize article_license for each article
-        if xml_data:
-            pmcid, full_text_link, license_from_xml = extract_pmcid_and_link(xml_data, pmid)
-            article_license = license_from_xml # XML takes precedence
-
-            if pmcid:
-                print(f"  PMCID: {pmcid} (Potential Open Access)")
-                print(f"  Full-text link: {full_text_link}")
-
-                if full_text_link:
-                    try:
-                        print(f"    Fetching full text from: {full_text_link}")
-                        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
-                        response = requests.get(full_text_link, headers=headers, timeout=10)
-                        response.raise_for_status() # Raise HTTPError for bad responses (4XX or 5XX)
-
-                        content_type = response.headers.get('Content-Type', '').lower()
-
-                        if 'text/html' in content_type:
-                            html_soup = BeautifulSoup(response.content, 'lxml') # Renamed to html_soup to avoid conflict
-
-                            # Try to extract license from HTML if not found in XML
-                            if not article_license and html_soup:
-                                license_from_html = extract_license_from_html(html_soup, pmid)
-                                if license_from_html:
-                                    article_license = license_from_html
-
-                            # Fallback for Title from HTML
-                            if title == "No Title Available" or not title:
-                                title_tag = html_soup.find('h1', class_='content-title')
-                                if not title_tag:
-                                    title_tag = html_soup.find('h1', class_='article-title')
-                                if not title_tag:
-                                    title_tag = html_soup.find('meta', attrs={'name': 'citation_title'})
-                                    if title_tag and title_tag.get('content'):
-                                        title = title_tag['content']
-                                        print(f"    Fell back to HTML meta tag for title: {title[:60]}...")
-                                    elif title_tag: # case where meta tag found but no content
-                                        title_tag = None # reset to avoid using empty tag
-                                if not title_tag: # check if previous meta tag search was successful
-                                    title_tag = html_soup.find('title')
-
-                                if title_tag and hasattr(title_tag, 'get_text') and title_tag.get_text(strip=True): # Check for text content for non-meta tags
-                                    title = title_tag.get_text(strip=True)
-                                    print(f"    Fell back to HTML for title: {title[:60]}...")
-                                elif title_tag and not hasattr(title_tag, 'get_text'): # handles the case where title was updated by meta tag already
-                                    pass
-
-
-                            # Fallback for Abstract from HTML
-                            if abstract == "No Abstract Available" or not abstract:
-                                abstract_section = html_soup.find('div', class_='abstract')
-                                if not abstract_section:
-                                    abstract_section = html_soup.find('div', id='abstract')
-                                if not abstract_section:
-                                    abstract_section = html_soup.find('section', id='abstract')
-                                if not abstract_section:
-                                    abstract_section = html_soup.find('div', attrs={'role': 'abstract'})
-
-                                if abstract_section and abstract_section.get_text(strip=True):
-                                    abstract = abstract_section.get_text(separator='\n\n', strip=True)
-                                    print(f"    Fell back to HTML for abstract: {abstract[:100]}...")
-                                else: # If no div/section found, try meta tag
-                                    meta_abstract_tag = html_soup.find('meta', attrs={'name': 'citation_abstract'})
-                                    if meta_abstract_tag and meta_abstract_tag.get('content'):
-                                        abstract = meta_abstract_tag['content']
-                                        print(f"    Fell back to HTML meta tag for abstract: {abstract[:100]}...")
-
-                            # --- Abstract Removal from Soup ---
-                            # The 'abstract' variable should be populated by now (either from Medline or HTML fallback).
-                            # Now, remove the abstract section from html_soup to prevent it from being included in full_text_content.
-                            abstract_selectors_for_removal = [
-                                'div.abstract', 'div#abstract',
-                                'section#abstract', "div[role='abstract']",
-                                'div.abstract_content', 'section.abstract', # Add a few more common ones
-                                "meta[name='citation_abstract']" # Also remove meta tag if it was used
-                            ]
-
-                            # Determine the primary search area for abstract removal
-                            # Default to html_soup, but prefer article_body if it has been identified
-                            # Note: article_body is identified *after* this block in the original code.
-                            # For removal, we should search within the whole soup or specific abstract containers.
-
-                            # First, try to identify a specific article_body for more targeted removal,
-                            # This is a bit of a lookahead to where article_body is usually found.
-                            # This helps if the abstract is outside the main article_body but we still want to clean article_body.
-                            temp_article_body_search_areas = [
-                                html_soup.find('article'),
-                                html_soup.find('div', id='article-body'),
-                                html_soup.find('div', class_='article-body'),
-                                html_soup.find('div', class_='main-content'),
-                                html_soup.find('div', class_='article-content'),
-                                html_soup.find('div', class_='rendered_body')
-                            ]
-                            identified_article_body_for_removal = next((body for body in temp_article_body_search_areas if body is not None), None)
-
-                            for selector in abstract_selectors_for_removal:
-                                elements_to_search_in = []
-                                if identified_article_body_for_removal:
-                                    elements_to_search_in.append(identified_article_body_for_removal)
-                                else: # Fallback to searching the whole soup if no specific body part identified yet
-                                    elements_to_search_in.append(html_soup)
-
-                                for search_area_root in elements_to_search_in:
-                                    if not search_area_root: continue # Skip if search area is None
-
-                                    if selector.startswith("meta["):
-                                        # Meta tags are typically in <head>, so search html_soup directly
-                                        meta_elements = html_soup.select(selector)
-                                        for el in meta_elements:
-                                            print(f"    Decomposing meta tag '{selector}' to separate abstract from full text.")
-                                            el.decompose()
-                                    else:
-                                        abstract_elements_to_remove = search_area_root.select(selector)
-                                        for abs_el in abstract_elements_to_remove:
-                                            print(f"    Decomposing element matching selector '{selector}' in {'identified body' if identified_article_body_for_removal else 'full soup'} to separate abstract from full text.")
-                                            abs_el.decompose()
-                            # --- End of Abstract Removal ---
-
-                            # Enhanced Full Text Extraction
-                            article_body = html_soup.find('article')
-                            # The article_body finding logic is repeated here from the original code,
-                            # ensuring it uses the potentially modified html_soup.
-                            if not article_body: # Check if already found by the abstract removal's temp search
-                                article_body = html_soup.find('div', id='article-body')
-                            if not article_body:
-                                article_body = html_soup.find('div', class_='article-body')
-                            if not article_body:
-                                article_body = html_soup.find('div', class_='main-content')
-                            if not article_body:
-                                article_body = html_soup.find('div', class_='article-content') # Common on PMC
-                            if not article_body:
-                                article_body = html_soup.find('div', class_='rendered_body') # Another common one
-                            # The original fallback to html_soup.find('body') is intentionally kept later
-                            # as it's a very broad selector.
-
-                            if article_body: # article_body might have been modified by decompose
-                                full_text_content = article_body.get_text(separator='\n\n', strip=True)
-                                full_text_content = full_text_content[:5000] # Limit length
-                                if full_text_content.strip(): # Check if content is not just whitespace after potential decompose
-                                    print(f"    Successfully extracted ~{len(full_text_content)} chars of text content (after abstract removal).")
-                                else:
-                                    print(f"    Full text content is empty after abstract removal and get_text().")
-                                    # Consider if a fallback to html_soup.body.get_text() is needed if article_body becomes empty
-                            else:
-                                # Fallback to body if no specific article_body found
-                                # This html_soup.find('body') should use the soup instance from which abstract was removed.
-                                fallback_body_search_area = html_soup.find('body')
-                                if fallback_body_search_area:
-                                    full_text_content = fallback_body_search_area.get_text(separator='\n\n', strip=True)
-                                    print(f"    Fell back to 'body' tag for full text extraction (after abstract removal). Extracted ~{len(full_text_content)} chars.")
-                                else:
-                                    print("    Could not find main article content body/div in HTML, nor the main 'body' tag (after abstract removal).")
-                                full_text_content = full_text_content[:5000] # Limit length
-
-
-                                # Still try to get license even if main body not found
-                                if not article_license and html_soup: # Check again, in case html_soup was valid but body wasn't
-                                    license_from_html = extract_license_from_html(html_soup, pmid) # html_soup is the modified one
-                                    if license_from_html:
-                                        article_license = license_from_html
-
-
-                        elif 'text/plain' in content_type:
-                            full_text_content = response.text[:5000]
-                            print(f"    Successfully extracted ~{len(full_text_content)} chars of plain text.")
-
-                        elif 'application/pdf' in content_type:
-                            print(f"    Link is a PDF, skipping direct text extraction: {full_text_link}")
-                            full_text_content = "[PDF content not extracted]"
-
-                        elif 'application/xml' in content_type or 'text/xml' in content_type:
-                             # Basic XML text extraction if it's not the PMC HTML page but some other XML
-                            try:
-                                xml_root = ET.fromstring(response.content)
-                                # Attempt to get all text nodes, crude but better than nothing
-                                text_parts = [elem.text for elem in xml_root.iter() if elem.text]
-                                full_text_content = " ".join(text_parts).strip()
-                                full_text_content = full_text_content[:5000]
-                                if full_text_content:
-                                    print(f"    Successfully extracted ~{len(full_text_content)} chars from XML response.")
-                                else:
-                                    print("    XML response, but no text content found.")
-                            except ET.ParseError:
-                                print("    Could not parse XML from direct link.")
-                            full_text_content = full_text_content if full_text_content else "[XML content not easily parsable to plain text]"
-
-                        else:
-                            print(f"    Unsupported content type: {content_type}")
-                            full_text_content = f"[Unsupported content type: {content_type}]"
-
-                    except requests.exceptions.Timeout:
-                        print(f"    Timeout while fetching: {full_text_link}")
-                        full_text_content = "[Fetching timed out]"
-                    except requests.exceptions.HTTPError as http_err:
-                        print(f"    HTTP error occurred: {http_err} for {full_text_link}")
-                        full_text_content = f"[HTTP error: {http_err.response.status_code}]"
-                    except requests.exceptions.RequestException as req_err:
-                        print(f"    Request error occurred: {req_err} for {full_text_link}")
-                        full_text_content = "[Request error]"
-                    except Exception as e:
-                        print(f"    An unexpected error occurred during full text fetching/parsing: {e}")
-                        full_text_content = "[Error during processing]"
+        # PubDate
+        if year:
+            if month:
+                try:
+                    month_num = int(month) if month.isdigit() else parser.parse(month, fuzzy=True).month
+                    if day:
+                        day_num = int(day)
+                        article_data["PubDate"] = f"{year} {month_abbr[month_num]} {day_num:02d}"  # Ex.: "2025 Jun 05"
+                    else:
+                        article_data["PubDate"] = f"{year} {month_abbr[month_num]}"  # Ex.: "1998 Oct"
+                except (ValueError, TypeError):
+                    article_data["PubDate"] = year  
             else:
-                print(f"  PMCID: Not found. Cannot attempt full text download without PMCID link.")
-                full_text_content = "[No PMCID link for full text]"
+                article_data["PubDate"] = year  # Only year if month missing
         else:
-            print(f"  Could not fetch metadata for PMID {pmid}.")
-            full_text_content = "[Metadata fetch failed]"
+            article_data["PubDate"] = ""
 
-        is_open_access = True if pmcid and full_text_link else False # Keep this as is
+        # Publication Year
+        article_data["PublicationYear"] = year if year else ""
 
-        final_license_value = article_license # Initialize with the detected license
+        # Publication Month (long)
+        if month:
+            try:
+                month_num = int(month) if month.isdigit() else parser.parse(month, fuzzy=True).month
+                article_data["PublicationMonth"] = month_name[month_num]  # Ex.: "October"
+            except (ValueError, TypeError):
+                article_data["PublicationMonth"] = ""
+        else:
+            article_data["PublicationMonth"] = ""
 
-        # Start of new filtering logic based on license and content availability
-        # License Handling:
-        # The script checks if a license is found. If not, it's marked 'unavailable'.
-        # If a license is found, it's checked against ALLOWED_LICENSES.
-        # Articles with unallowed licenses are filtered out.
-        if not article_license or article_license.strip() == "":
-            # Case: License is missing or empty. Mark as 'unavailable'.
-            # The article is not immediately excluded at this point.
-            # It can still be included if it has available content (full text or abstract).
-            final_license_value = "unavailable"
-            print(f"  Article {pmid}: License not found or empty, marked as 'unavailable'.")
-        elif article_license not in ALLOWED_LICENSES:
-            # Case: License is present but not in the allowed list. Exclude the article.
-            filtered_out_count += 1
-            print(f"  Article {pmid} filtered out. Unallowed License: '{article_license}'.")
-            print("-" * 20)
-            time.sleep(0.5) # Respect API limits even when skipping
-            continue # Exclude article, proceed to the next one.
+        # Publication Day
+        article_data["PublicationDay"] = f"{int(day):02d}" if day and day.isdigit() else ""
 
-        # Content Availability Check:
-        # After license check, the article's content (full text and abstract) is assessed.
-        # The article must have either available full text or an available abstract to be included.
-        full_text_is_avail = is_full_text_available(full_text_content)
-        abstract_is_avail = is_abstract_available(abstract)
+        # Language and Country
+        article_data["Language"] = citation["Article"].get("Language", [""])[0]
+        article_data["Country"] = citation.get("MedlineJournalInfo", {}).get("Country", "")
 
-        if not full_text_is_avail and not abstract_is_avail:
-            # Case: Neither full text nor abstract is available. Exclude the article.
-            filtered_out_count += 1
-            reason = "No full text and no abstract available"
-            if full_text_content and full_text_content not in ["[No PMCID link for full text]", "[Metadata fetch failed]"]:
-                reason = f"Full text placeholder '{full_text_content}' and no abstract"
-            elif abstract == "No Abstract Available" and not full_text_is_avail :
-                 reason = "No abstract available and no usable full text"
-            print(f"  Article {pmid} filtered out. Reason: {reason}.")
-            print("-" * 20)
-            time.sleep(0.5) # Respect API limits even when skipping
-            continue # Exclude article, proceed to the next one.
+        # Authors, Keyword & Publication Type
+        if "AuthorList" in citation["Article"]:
+            authors = citation["Article"]["AuthorList"]
+            author_names = [
+                f"{a['ForeName']} {a['LastName']}" 
+                for a in authors if "ForeName" in a and "LastName" in a
+            ]
+            article_data["Authors"] = "; ".join(author_names) if author_names else ""
+        else:
+            article_data["Authors"] = ""
 
-        # Article Inclusion Criteria:
-        # An article is included if it meets the following conditions:
-        # 1. Its license is either in ALLOWED_LICENSES OR was marked as 'unavailable' (originally missing/empty).
-        # AND
-        # 2. It has available full text OR an available abstract.
-        processed_articles_data.append({
-            "PMID": pmid,
-            "Title": title,
-            "Abstract": abstract, # Store original abstract
-            "IsOpenAccess": is_open_access,
-            "FullTextContent": full_text_content if full_text_content else "[No content extracted or not applicable]",
-            "License": final_license_value, # Use the final_license_value
-            "Authors": authors
-        })
-        print(f"  Article {pmid} (License: '{final_license_value}') added to dataset. Full text available: {full_text_is_avail}, Abstract available: {abstract_is_avail}.")
-        print("-" * 20)
+        author_keywords = []
+        if "KeywordList" in citation:
+            for kwlist in citation["KeywordList"]:
+                for kw in kwlist:
+                    if isinstance(kw, str):
+                        author_keywords.append(kw)
+        article_data["AuthorKeywords"] = "; ".join(author_keywords) if author_keywords else ""
 
-        # Respect NCBI API usage guidelines
-        time.sleep(0.5)
+        pt_list = citation["Article"].get("PublicationTypeList", [])
+        article_data["PublicationTypes"] = "; ".join(str(pt) for pt in pt_list) if pt_list else ""
 
-    # Write to CSV
-    csv_file_path = "pubmed_articles.csv"
-    csv_header = ["PMID", "Title", "Abstract", "Authors", "IsOpenAccess", "FullTextContent", "License"] # Add "Authors" to header
+        # MeSH Terms Indexing with Qualifiers
+        mesh_terms = []
+        if "MeshHeadingList" in citation:
+                for mh in citation["MeshHeadingList"]:
+                    descriptor = str(mh["DescriptorName"])
+                    qualifiers = mh.get("QualifierName", [])
+                    if qualifiers:
+                         for qualifier in qualifiers:
+                            mesh_terms.append(f"{descriptor}/{str(qualifier)}")
+                    else:
+                        mesh_terms.append(descriptor)
+        article_data["MeSH_Terms"] = "; ".join(mesh_terms) if mesh_terms else ""
 
-    try:
-        with open(csv_file_path, "w", newline="", encoding="utf-8") as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=csv_header)
-            writer.writeheader()
-            for article_data in processed_articles_data:
-                writer.writerow(article_data)
-        print(f"\nSuccessfully wrote {len(processed_articles_data)} articles to {csv_file_path}")
-        if filtered_out_count > 0:
-            # Update print statement for more general filtering
-            print(f"Filtered out {filtered_out_count} articles due to license or content availability criteria.")
-    except IOError:
-        print(f"Error: Could not write to CSV file {csv_file_path}")
+        # License data from Unpaywall
+        oa_status_str, oa_type, license, best_oa_url = get_unpaywall_info(article_data["DOI"], UNPAYWALL_EMAIL)
+        article_data["AccessStatus"] = oa_status_str or "Unknown"
+        article_data["OA_Type"] = oa_type or ""
+        article_data["License"] = license or ""
+        article_data["FreePDF_Link"] = best_oa_url or ""
+
+        data.append(article_data)
+
     except Exception as e:
-        print(f"An unexpected error occurred during CSV writing: {e}")
+        logger.error(f"Error processing article PMID {article_data.get('PMID', 'Unknown')}: {e}")
+        continue
 
-if __name__ == "__main__":
-    main()
+# Step 4: Create DataFrame
+df = pd.DataFrame(data)
+
+column_order = [
+    "PMID", "Title", "Abstract", "Journal", "PubDate", "PublicationYear",
+    "PublicationMonth", "PublicationDay", "Authors", "AuthorKeywords", "DOI",
+    "DOI_Link", "PMC_Link", "Volume", "Issue", "Pagination", "ELocationID",
+    "Language", "Country", "PublicationTypes", "MeSH_Terms",
+    "AccessStatus", "OA_Type", "License", "FreePDF_Link"
+]
+
+df = df[[col for col in column_order if col in df.columns]]
+
+# Step 5: Log results and save
+logger.info(f"Processed {len(df)} articles successfully.")
+# Optionally, log the DataFrame preview (limit to first few rows for brevity)
+logger.debug(f"DataFrame preview:\n{df.head().to_string()}")
+
+#display(df)
+
+# Save to CSV
+df.to_csv("pubmed_articles_Metadata_with_license.csv", index=False)
