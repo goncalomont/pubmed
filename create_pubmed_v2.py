@@ -280,41 +280,113 @@ for art_type, art_list in articles.items():             # iterate over both keys
 
             # ---------- 7.12  Full-text from PMC ----------
             full_text = ""
-            
-            pmc_link = article_data.get("PMC_Link")            # e.g. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9183209/
+            pmc_link = article_data.get("PMC_Link")
             if pmc_link:
-                m = re.search(r"PMC(\d+)", pmc_link)           # capture digits only → 9183209
+                m = re.search(r"PMC(\d+)", pmc_link)
                 if m:
                     pmcid = m.group(1)
                     try:
                         pmc_handle = Entrez.efetch(
                             db="pmc",
-                            id=pmcid,                          # numeric UID (no “PMC” prefix)
+                            id=pmcid,
                             rettype="full",
                             retmode="xml"
                         )
-                        pmc_xml = pmc_handle.read()
+                        pmc_xml_bytes = pmc_handle.read() # Read as bytes
                         pmc_handle.close()
-            
+
+                        # Decode XML bytes to string, attempting UTF-8 first, then ISO-8859-1 as fallback
+                        try:
+                            pmc_xml = pmc_xml_bytes.decode('utf-8')
+                        except UnicodeDecodeError:
+                            logger.warning(f"UTF-8 decoding failed for PMC{pmcid}, trying ISO-8859-1.")
+                            pmc_xml = pmc_xml_bytes.decode('iso-8859-1', errors='replace')
+
+
                         # ----- parser: try fast lxml first, fallback to built-in -----
                         try:
                             soup = BeautifulSoup(pmc_xml, "lxml-xml")
-                        except Exception:
-                            soup = BeautifulSoup(pmc_xml, "xml")   # built-in xml parser
-            
-                        body = soup.find("body")
-                        if body:
-                            full_text = "\n\n".join(
-                                p.get_text(" ", strip=True) for p in body.find_all("p")
-                            )
+                        except Exception as e_lxml:
+                            logger.warning(f"lxml-xml parsing failed for PMC{pmcid}: {e_lxml}. Falling back to xml parser.")
+                            soup = BeautifulSoup(pmc_xml, "xml")
+
+                        content_sections = []
+
+                        # Try to find <article-body>, then <body>
+                        main_content_element = soup.find("article-body")
+                        if not main_content_element:
+                            main_content_element = soup.find("body")
+
+                        if main_content_element:
+                            # Attempt to find and exclude the abstract
+                            abstract_element = main_content_element.find(["abstract", "sec"], attrs={"sec-type": "abstract"})
+
+                            if abstract_element:
+                                # Extract content after the abstract
+                                for sibling in abstract_element.find_next_siblings():
+                                    # Exclude common non-content sections that might follow an abstract
+                                    if sibling.name in ['script', 'style', 'table-wrap-foot', 'notes', 'fn-group', 'back']:
+                                        continue
+                                    # Extract text from relevant tags, e.g., p, div, section
+                                    # For now, stick to <p> for simplicity, can be expanded
+                                    paragraphs = sibling.find_all('p')
+                                    for p in paragraphs:
+                                        content_sections.append(p.get_text(" ", strip=True))
+                                    if not paragraphs and sibling.name == 'p': # If sibling itself is a p
+                                        content_sections.append(sibling.get_text(" ", strip=True))
+
+                                if not content_sections: # If abstract was found but no content after it using p tags
+                                    logger.warning(f"Abstract found for PMC{pmcid}, but no <p> tagged content followed. Trying all text after abstract.")
+                                    # Fallback: get all text after abstract_element, then clean it up
+                                    text_after_abstract = ""
+                                    for element in abstract_element.find_all_next(string=True):
+                                        # Avoid text from script, style, and common metadata/footnote tags
+                                        if element.parent.name not in ['script', 'style', 'xref', 'fig', 'table', 'label', 'caption', 'title', 'contrib-group', 'aff', 'author-notes', 'pub-date', 'volume', 'issue', 'fpage', 'lpage', 'copyright-statement', 'license', 'related-article', 'notes', 'fn-group', 'back', 'ack', 'ref-list']:
+                                            text_after_abstract += element + " "
+
+                                    # Basic cleaning: replace multiple newlines/spaces, strip
+                                    cleaned_text = re.sub(r'\s\s+', ' ', text_after_abstract).strip()
+                                    if cleaned_text:
+                                      content_sections.append(cleaned_text)
+
+
+                            else: # No abstract found, extract from all <p> in main_content_element
+                                logger.info(f"No abstract section explicitly found for PMC{pmcid}. Extracting all <p> tags from main content.")
+                                paragraphs = main_content_element.find_all('p')
+                                for p in paragraphs:
+                                    content_sections.append(p.get_text(" ", strip=True))
+
+                            full_text = "\n\n".join(filter(None, content_sections))
+
                         else:
-                            logger.warning(f"No <body> tag in PMC XML for {pmcid}")
-            
+                            logger.warning(f"No <article-body> or <body> tag in PMC XML for {pmcid}")
+                            # Fallback: try to get all text from the soup, minus common metadata
+                            all_text_parts = []
+                            for element in soup.find_all(string=True):
+                                if element.parent.name not in ['script', 'style', 'xref', 'fig', 'table', 'label', 'caption', 'title', 'contrib-group', 'aff', 'author-notes', 'pub-date', 'volume', 'issue', 'fpage', 'lpage', 'copyright-statement', 'license', 'related-article', 'notes', 'fn-group', 'ack', 'ref-list', 'journal-meta', 'article-meta', 'front']:
+                                    all_text_parts.append(element.strip())
+                            full_text = "\n\n".join(filter(None, all_text_parts))
+                            if not full_text:
+                                logger.warning(f"Fallback text extraction also yielded no text for PMC{pmcid}")
+
+
+                        if not full_text.strip() and article_data.get("AccessStatus") == "Open Access":
+                            logger.warning(f"Full text is empty for OPEN ACCESS article PMC{pmcid} with pmc_link: {pmc_link}. Check XML structure.")
+                        elif not full_text.strip() and article_data.get("AccessStatus") != "Open Access":
+                            logger.info(f"Full text is empty for non-Open Access article PMC{pmcid}. This may be expected.")
+                        elif full_text.strip():
+                            logger.info(f"Successfully extracted full text for PMC{pmcid}.")
+
+
                     except Exception as exc:
-                        logger.warning(f"Full-text fetch failed for PMC{pmcid}: {exc}")
-            
+                        logger.warning(f"Full-text fetch or parsing failed for PMC{pmcid}: {exc}")
+                else:
+                    logger.warning(f"Could not extract PMCID from PMC_Link: {pmc_link}")
+            else:
+                logger.info(f"No PMC_Link for PMID {article_data.get('PMID', 'Unknown')}. Skipping full text.")
+
             # store result (empty string if nothing retrieved)
-            article_data["FullText"] = full_text
+            article_data["FullText"] = full_text.strip()
 
             # 7.13  Article-type filter labels
             article_data["ArticleTypeFilters"] = detect_filters(
